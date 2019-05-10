@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: May 10, 2019 at 04:33 PM
+-- Generation Time: May 10, 2019 at 10:22 PM
 -- Server version: 5.7.25
 -- PHP Version: 7.3.1
 
@@ -23,7 +23,9 @@ SET time_zone = "+00:00";
 CREATE TABLE `clients` (
   `id` int(11) NOT NULL,
   `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL
+  `last_name` varchar(255) NOT NULL,
+  `phone_number` varchar(255) NOT NULL,
+  `stylist_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -35,12 +37,10 @@ CREATE TABLE `clients` (
 CREATE TABLE `stylists` (
   `id` int(11) NOT NULL,
   `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL
+  `last_name` varchar(255) NOT NULL,
+  `phone_number` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Indexes for dumped tables
---
 
 --
 -- Indexes for table `clients`
@@ -68,4 +68,4 @@ ALTER TABLE `clients`
 -- AUTO_INCREMENT for table `stylists`
 --
 ALTER TABLE `stylists`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
