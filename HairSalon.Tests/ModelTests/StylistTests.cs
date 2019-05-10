@@ -21,7 +21,8 @@ namespace HairSalon.Tests
     {
       string firstName = "Sylvia";
       string lastName = "Green";
-      Stylist stylist = new Stylist(firstName, lastName);
+      string phoneNumber = "206-555-6789";
+      Stylist stylist = new Stylist(firstName, lastName, phoneNumber);
       Assert.AreEqual(typeof(Stylist), stylist.GetType());
     }
     [TestMethod]
@@ -29,7 +30,8 @@ namespace HairSalon.Tests
     {
       string firstName = "Sylvia";
       string lastName = "Green";
-      Stylist stylist = new Stylist(firstName, lastName);
+      string phoneNumber = "206-555-6789";
+      Stylist stylist = new Stylist(firstName, lastName, phoneNumber);
       string actualResult = stylist.GetFirstName();
       Assert.AreEqual(firstName, actualResult);
     }
@@ -38,7 +40,8 @@ namespace HairSalon.Tests
     {
       string firstName = "Sylvia";
       string lastName = "Green";
-      Stylist stylist = new Stylist(firstName, lastName);
+      string phoneNumber = "206-555-6789";
+      Stylist stylist = new Stylist(firstName, lastName, phoneNumber);
       string actualResult = stylist.GetLastName();
       Assert.AreEqual(lastName, actualResult);
     }
@@ -47,7 +50,8 @@ namespace HairSalon.Tests
     {
       string firstName = "Sylvia";
       string lastName = "Green";
-      Stylist stylist = new Stylist(firstName, lastName);
+      string phoneNumber = "206-555-6789";
+      Stylist stylist = new Stylist(firstName, lastName, phoneNumber);
       string newFirstName = "Jacqueline";
       stylist.SetFirstName(newFirstName);
       string actualResult = stylist.GetFirstName();
@@ -58,11 +62,34 @@ namespace HairSalon.Tests
     {
       string firstName = "Sylvia";
       string lastName = "Green";
-      Stylist stylist = new Stylist(firstName, lastName);
+      string phoneNumber = "206-555-6789";
+      Stylist stylist = new Stylist(firstName, lastName, phoneNumber);
       string newLastName = "Blue";
       stylist.SetLastName(newLastName);
       string actualResult = stylist.GetLastName();
       Assert.AreEqual(newLastName, actualResult);
+    }
+    [TestMethod]
+    public void GetPhoneNumber_ReturnsPhoneNumber_string()
+    {
+      string firstName = "Sylvia";
+      string lastName = "Green";
+      string phoneNumber = "206-555-6789";
+      Stylist stylist = new Stylist(firstName, lastName, phoneNumber);
+      string actualResult = stylist.GetPhoneNumber();
+      Assert.AreEqual(phoneNumber, actualResult);
+    }
+    [TestMethod]
+    public void SetPhoneNumber_SetsPhoneNumber_string()
+    {
+      string firstName = "Sylvia";
+      string lastName = "Green";
+      string phoneNumber = "206-555-6789";
+      Stylist stylist = new Stylist(firstName, lastName, phoneNumber);
+      string newPhoneNumber = "206-777-0000";
+      stylist.SetPhoneNumber(newPhoneNumber);
+      string actualResult = stylist.GetPhoneNumber();
+      Assert.AreEqual(newPhoneNumber, actualResult);
     }
     //This test implicitly tests the FindStylist method so no explicit test was written for it.
     [TestMethod]
@@ -70,7 +97,8 @@ namespace HairSalon.Tests
     {
       string firstName = "Sylvia";
       string lastName = "Green";
-      Stylist stylist = new Stylist(firstName, lastName);
+      string phoneNumber = "206-555-6789";
+      Stylist stylist = new Stylist(firstName, lastName, phoneNumber);
       stylist.Save();
       int stylistId = stylist.GetId();
       Stylist actualResult = Stylist.Find(stylistId);

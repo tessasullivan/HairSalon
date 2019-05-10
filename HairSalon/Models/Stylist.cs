@@ -9,11 +9,13 @@ namespace HairSalon.Models
     private int _id;
     private string _firstName;
     private string _lastName;
-    public Stylist(string firstName, string lastName, int id = 0)
+    private string _phoneNumber;
+    public Stylist(string firstName, string lastName, string phoneNumber, int id = 0)
     {
       _id = id;
       _firstName = firstName;
       _lastName = lastName;
+      _phoneNumber = phoneNumber;
     }
     public string GetFirstName()
     {
@@ -30,6 +32,14 @@ namespace HairSalon.Models
     public void SetLastName(string lastName)
     {
       _lastName = lastName;
+    }
+    public string GetPhoneNumber()
+    {
+      return _phoneNumber;
+    }
+    public void SetPhoneNumber(string phoneNumber)
+    {
+      _phoneNumber = phoneNumber;
     }
     public int GetId()
     {
@@ -49,13 +59,15 @@ namespace HairSalon.Models
       int dbId = 0;
       string firstName = "";
       string lastName = "";
+      string phoneNumber = "";
       while (rdr.Read())
       {
         dbId = rdr.GetInt32(0);
         firstName = rdr.GetString(1);
         lastName = rdr.GetString(2);
+        phoneNumber = rdr.GetString(3);
       }
-      Stylist foundStylist = new Stylist(firstName, lastName, dbId);
+      Stylist foundStylist = new Stylist(firstName, lastName, phoneNumber, dbId);
       conn.Close();
       if (conn != null)
       {
@@ -68,7 +80,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO stylists (first_name, last_name) VALUES (@FirstName, @LastName);";
+      cmd.CommandText = @"INSERT INTO stylists (first_name, last_name, phone_number) VALUES (@FirstName, @LastName, @phoneNumber);";
       MySqlParameter firstName = new MySqlParameter();
       firstName.ParameterName = "@FirstName";
       firstName.Value = this._firstName;
@@ -77,6 +89,10 @@ namespace HairSalon.Models
       lastName.ParameterName = "@LastName";
       lastName.Value = this._lastName;
       cmd.Parameters.Add(lastName);
+      MySqlParameter phoneNumber = new MySqlParameter();
+      phoneNumber.ParameterName = "@phoneNumber";
+      phoneNumber.Value = this._phoneNumber;
+      cmd.Parameters.Add(phoneNumber);
       cmd.ExecuteNonQuery();
       _id = (int) cmd.LastInsertedId;
 
@@ -96,9 +112,9 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM items where id = (@itemId);";
+      cmd.CommandText = @"DELETE FROM stylists where id = (@id);";
       MySqlParameter thisId = new MySqlParameter();
-      thisId.ParameterName = "@itemId";
+      thisId.ParameterName = "@id";
       thisId.Value = id;
       cmd.Parameters.Add(thisId);
       cmd.ExecuteNonQuery();

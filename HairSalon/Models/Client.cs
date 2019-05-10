@@ -9,11 +9,13 @@ namespace HairSalon.Models
     int _id;
     private string _firstName;
     private string _lastName;
-    public Client(string firstName, string lastName, int id = 0)
+    private string _phoneNumber;
+    public Client(string firstName, string lastName, string phoneNumber, int id = 0)
     {
       _id = id;
       _firstName = firstName;
       _lastName = lastName;
+      _phoneNumber = phoneNumber;
     }
     public string GetFirstName()
     {
@@ -31,6 +33,14 @@ namespace HairSalon.Models
     {
       _lastName = lastName;
     }
+    public string GetPhoneNumber()
+    {
+      return _phoneNumber;
+    }
+    public void SetPhoneNumber(string phoneNumber)
+    {
+      _phoneNumber = phoneNumber;
+    }
     public int GetId()
     {
       return _id;
@@ -40,7 +50,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO clients (first_name, last_name) VALUES (@FirstName, @LastName);";
+      cmd.CommandText = @"INSERT INTO clients (first_name, last_name, phone_number) VALUES (@FirstName, @LastName, @phoneNumber);";
       MySqlParameter firstName = new MySqlParameter();
       firstName.ParameterName = "@FirstName";
       firstName.Value = this._firstName;
@@ -49,6 +59,10 @@ namespace HairSalon.Models
       lastName.ParameterName = "@LastName";
       lastName.Value = this._lastName;
       cmd.Parameters.Add(lastName);
+      MySqlParameter phoneNumber = new MySqlParameter();
+      phoneNumber.ParameterName = "@phoneNumber";
+      phoneNumber.Value = this._phoneNumber;
+      cmd.Parameters.Add(phoneNumber);
       cmd.ExecuteNonQuery();
       _id = (int) cmd.LastInsertedId;
 
@@ -72,13 +86,15 @@ namespace HairSalon.Models
       int dbId = 0;
       string firstName = "";
       string lastName = "";
+      string phoneNumber = "";
       while (rdr.Read())
       {
         dbId = rdr.GetInt32(0);
         firstName = rdr.GetString(1);
         lastName = rdr.GetString(2);
+        phoneNumber = rdr.GetString(3);
       }
-      Client foundClient = new Client(firstName, lastName, dbId);
+      Client foundClient = new Client(firstName, lastName, phoneNumber, dbId);
       conn.Close();
       if (conn != null)
       {
@@ -115,7 +131,8 @@ namespace HairSalon.Models
         bool idEquality = (this.GetId() == client1.GetId());
         bool firstNameEquality = (this.GetFirstName() == client1.GetFirstName());
         bool lastNameEquality = (this.GetLastName() == client1.GetLastName());
-        return (idEquality && firstNameEquality && lastNameEquality);
+        bool phoneNumberEquality = (this.GetPhoneNumber() == client1.GetPhoneNumber());
+        return (idEquality && firstNameEquality && lastNameEquality && phoneNumberEquality);
       }
     }
   }
