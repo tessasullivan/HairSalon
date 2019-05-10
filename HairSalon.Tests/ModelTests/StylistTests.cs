@@ -1,20 +1,21 @@
 using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HairSalon.Models;
 
 namespace HairSalon.Tests
 {
   [TestClass]
-  public class HairSalonTest : IDisposable
+  public class StylistTests : IDisposable
   {
     public void Dispose()
     {
       Stylist.ClearAll();
     }
-    // public StylistTest()
-    // {
-    //   DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=tessa_sullivan_test;convert zero datetime=True;";
-    // }
+    public StylistTests()
+    {
+      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=tessa_sullivan_test;convert zero datetime=True;Allow User Variables=true;";
+    }
     [TestMethod]
     public void StylistConstructor_CreatesInstanceOfStylist_Stylist()
     {
@@ -62,6 +63,17 @@ namespace HairSalon.Tests
       stylist.SetLastName(newLastName);
       string actualResult = stylist.GetLastName();
       Assert.AreEqual(newLastName, actualResult);
+    }
+    [TestMethod]
+    public void Save_SavesStylistToDB_String()
+    {
+      string firstName = "Sylvia";
+      string lastName = "Green";
+      Stylist stylist = new Stylist(firstName, lastName);
+      stylist.Save();
+      int stylistId = stylist.GetId();
+      Stylist actualResult = Stylist.FindStylist(stylistId);
+      Assert.AreEqual(stylist, actualResult);
     }
   }
 }
