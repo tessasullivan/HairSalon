@@ -14,7 +14,7 @@ namespace HairSalon.Tests
     }
     public StylistTests()
     {
-      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=tessa_sullivan_test;convert zero datetime=True;Allow User Variables=true;";
+      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=tessa_sullivan_test;convert zero datetime=True;";
     }
     [TestMethod]
     public void StylistConstructor_CreatesInstanceOfStylist_Stylist()
@@ -64,15 +64,16 @@ namespace HairSalon.Tests
       string actualResult = stylist.GetLastName();
       Assert.AreEqual(newLastName, actualResult);
     }
+    //This test implicitly tests the FindStylist method so no explicit test was written for it.
     [TestMethod]
-    public void Save_SavesStylistToDB_String()
+    public void Save_SavesStylistToDB_Stylist()
     {
       string firstName = "Sylvia";
       string lastName = "Green";
       Stylist stylist = new Stylist(firstName, lastName);
       stylist.Save();
       int stylistId = stylist.GetId();
-      Stylist actualResult = Stylist.FindStylist(stylistId);
+      Stylist actualResult = Stylist.Find(stylistId);
       Assert.AreEqual(stylist, actualResult);
     }
   }

@@ -35,7 +35,7 @@ namespace HairSalon.Models
     {
       return _id;
     }
-    public static Stylist FindStylist(int id)
+    public static Stylist Find(int id)
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
