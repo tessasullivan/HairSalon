@@ -13,6 +13,7 @@ namespace HairSalon.Controllers
       return View(allStylists);
     }
 
+    //Displays form for adding a stylist
     [HttpGet("/stylists/new")]
     public ActionResult New()
     {
@@ -29,5 +30,8 @@ namespace HairSalon.Controllers
 
       return RedirectToAction("Index", allStylists);
     }
+
+
+
   }
 }
