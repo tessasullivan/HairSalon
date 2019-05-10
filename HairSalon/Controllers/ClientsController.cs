@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HairSalon.Controllers
 {
-  public class StylistController : Controller
+  public class ClientsController : Controller
   {
 
-    [Route("/")]
+    [Route("/clients")]
     public ActionResult Index() { return View(); }
   }
 }

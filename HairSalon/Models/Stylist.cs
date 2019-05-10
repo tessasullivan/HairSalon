@@ -104,9 +104,36 @@ namespace HairSalon.Models
     }
     public static List<Stylist> GetAll()
     {
-      List<Stylist> dummyList = new List<Stylist>{};
-      return dummyList;
+      List<Stylist> allStylists = new List<Stylist>{};
+
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM stylists;";
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+      int dbId = 0;
+      string firstName = "";
+      string lastName = "";
+      string phoneNumber = "";
+      while (rdr.Read())
+      {
+        dbId = rdr.GetInt32(0);
+        firstName = rdr.GetString(1);
+        lastName = rdr.GetString(2);
+        phoneNumber = rdr.GetString(3);
+        Stylist stylist = new Stylist(firstName, lastName, phoneNumber, dbId);
+        allStylists.Add(stylist);
+      }
+      conn.Close();
+      if (conn != null)
+      {
+          conn.Dispose();
+      }
+      return allStylists;
     }
+
+
+
     public void Delete(int id)
     {
       MySqlConnection conn = DB.Connection();
