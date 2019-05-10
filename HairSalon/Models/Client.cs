@@ -4,11 +4,11 @@ using MySql.Data.MySqlClient;
 
 namespace HairSalon.Models
 {
-  public class Stylist
+  public class Client
   {
     private string _firstName;
     private string _lastName;
-    public Stylist(string firstName, string lastName)
+    public Client(string firstName, string lastName)
     {
       _firstName = firstName;
       _lastName = lastName;
@@ -28,19 +28,6 @@ namespace HairSalon.Models
     public void SetLastName(string lastName)
     {
       _lastName = lastName;
-    }
-    public static void ClearAll()
-    {
-      MySqlConnection conn = DB.Connection();
-      conn.Open();
-      var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM stylists;";
-      cmd.ExecuteNonQuery();
-      conn.Close();
-      if (conn != null)
-      {
-        conn.Dispose();
-      }
     }
   }
 }
