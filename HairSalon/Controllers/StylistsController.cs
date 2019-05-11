@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using HairSalon.Models;
@@ -31,6 +32,17 @@ namespace HairSalon.Controllers
       return RedirectToAction("Index", allStylists);
     }
 
+    [HttpGet("/stylists/{id}")]
+    public ActionResult Show(int stylistId)
+    {
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      Stylist stylist = Stylist.Find(stylistId);
+      List<Client> clientList = stylist.GetClients(stylistId);
+      model.Add("stylist", stylist);
+      model.Add("clients", clientList);
+      return View(model);
+    }
+
     // This one creates new Clients with a given Stylist, not new stylists and then displays the stylist with all their clients
     [HttpPost("/stylists/{stylistId}/clients")]
     public ActionResult Create(string firstName, string lastName, string phoneNumber, int stylistId, int id)
@@ -41,7 +53,7 @@ namespace HairSalon.Controllers
       client.Save();
       List<Client> allClients = stylist.GetClients(stylistId);
       model.Add("stylist", stylist);
-      model.Add("client", allClients);
+      model.Add("clients", allClients);
       return View("Show", model);
     }
 

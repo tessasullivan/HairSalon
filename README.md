@@ -24,11 +24,17 @@ User Stories
 1. Clone this repository.
 2. Install .Net 2.2 
     * Go to https://dotnet.microsoft.com/download/dotnet-core/2.2 and download the appropriate installer for your OS.
-3. cd to repo directory
+3. cd to HairSalon and run dotnet restore.
+4. cd to HairSalon.Tests and run dotnet restore (optional).
+5. Install and configure MySQL - MAMP is recommended.
+6. Run MySQL.
+7. Import the tessa_sullilvan.sql and tessa_sullivan_test.sql files located in the repository's main directory into MySQL.
+8. Run dotnet run --project HairSalon.
+9. Load localhost:5000 in your web browser.
 
 
 ## Known Issues
-* No known issues at this time.
+* The page which gives details about a stylist's client list does not always list details.
 
 ## Technologies Used
 

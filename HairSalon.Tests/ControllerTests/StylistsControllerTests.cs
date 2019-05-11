@@ -51,8 +51,8 @@ namespace HairSalon.Tests
       string firstName = "Sylvia";
       string lastName = "Green";
       string phoneNumber = "206-555-6789";
-      int id = 1;
-      Stylist stylist = new Stylist(firstName, lastName, phoneNumber, id);
+      Stylist stylist = new Stylist(firstName, lastName, phoneNumber);
+      int id = stylist.GetId();
       StylistsController controller = new StylistsController();
       RedirectToActionResult actionResult = controller.Create(firstName, lastName, phoneNumber, id) as RedirectToActionResult;
       string result = actionResult.ActionName;
@@ -65,5 +65,29 @@ namespace HairSalon.Tests
       ActionResult newView = controller.New ();
       Assert.IsInstanceOfType (newView, typeof (ViewResult));
     }
+    // [TestMethod]
+    // public void Show_HasCorrectModelType_Dictionary()
+    // {
+    //   StylistsController controller = new StylistsController ();
+    //   Dictionary<string, object> model = new Dictionary<string, object>();
+    //   string firstName = "Sylvia";
+    //   string lastName = "Green";
+    //   string phoneNumber = "206-555-6789";
+    //   Stylist stylist = new Stylist(firstName, lastName, phoneNumber);
+    //   stylist.Save();
+    //   int stylistId = stylist.GetId();
+    //   string clientFirstName = "Jack";
+    //   string clientLastName = "Daniels";
+    //   string clientPhoneNumber = "253-555-6789";
+    //   Client client = new Client(clientFirstName, clientLastName, clientPhoneNumber, stylistId);
+    //   client.Save();
+    //   List<Client> clientList = stylist.GetClients(stylistId);
+    //   model.Add("stylist", stylist);
+    //   model.Add("clients", clientList);
+
+    //   ViewResult showView = controller.Show(stylistId) as ViewResult;
+    //   var result = showView.ViewData.Model;
+    //   Assert.IsInstanceOfType(result, typeof(model));
+    // }
   }
 }
