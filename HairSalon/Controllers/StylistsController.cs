@@ -31,7 +31,19 @@ namespace HairSalon.Controllers
       return RedirectToAction("Index", allStylists);
     }
 
-
+    // This one creates new Clients with a given Stylist, not new stylists and then displays the stylist with all their clients
+    [HttpPost("/stylists/{stylistId}/clients")]
+    public ActionResult Create(string firstName, string lastName, string phoneNumber, int stylistId, int id)
+    {
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      Stylist stylist = Stylist.Find(stylistId);
+      Client client = new Client(firstName, lastName, phoneNumber, stylistId, id);
+      client.Save();
+      List<Client> allClients = stylist.GetClients(stylistId);
+      model.Add("stylist", stylist);
+      model.Add("client", allClients);
+      return View("Show", model);
+    }
 
   }
 }

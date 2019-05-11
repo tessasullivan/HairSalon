@@ -119,6 +119,7 @@ namespace HairSalon.Models
       }
       return foundClient;
     }
+
     public static void ClearAll()
     {
       MySqlConnection conn = DB.Connection();
