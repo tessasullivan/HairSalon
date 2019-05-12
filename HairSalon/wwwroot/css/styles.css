@@ -1,6 +1,6 @@
 
 h1 {
-  color: #4700b3;
+  color: #ccc;
   margin-left: 15px;
 }
 h2 {
@@ -12,24 +12,28 @@ h2 {
 body {
   margin: 0;
   padding: 0;
-  background: #ccc;
+  background-color: #ccc;
+  background-image: url("/img/the-serenity-of-night.jpg");
+  background-repeat: no-repeat;
+  color: white;
 }
 th, td {
-  padding: 5px;
+  padding-right: 10px;
 }
 nav a {
   list-style: none;
-  background-color: #400080;
+  /* background-color: #400080; */
+  background-color: #ddd;
   text-align: center;
   padding: 0;
   margin: 0;
   /* font-family: 'Oswald', sans-serif; */
-  font-size: 1em;
+  font-size: 1.2em;
   line-height: 40px;
   height: 40px;
   border-bottom: 1px solid #888;
   text-decoration: none;
-  color: #fff;
+  color: #000099;
   display: block;
   transition: .3s background-color;
 }

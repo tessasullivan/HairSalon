@@ -9,13 +9,16 @@ This application will allow salon employees to manage the salon's stylists and c
 
 
 ### Specs
-
-User Stories
-* As a salon employee, I need to be able to see a list of all our stylists.
-* As an employee, I need to be able to select a stylist, see their details, and see a list of all clients that belong to that stylist.
-* As an employee, I need to add new stylists to our system when they are hired.
-* As an employee, I need to be able to add new clients to a specific stylist. I should not be able to add a client if no stylists have been added.
-
+| Spec | Input | Output |
+| :-------------     | :------------- | :------------- |
+| Home page allows employee to go to page with all stylists and to a page to add stylist | Opens localhost:5000 in browser | Information about the salon appears along with navbar to functionality|
+| An employee can see the details of a specific stylist | Clicks on stylist's name | A list of their clients appears |
+| An employee can see the details of a specific client | Clicks on stylist's name and then a client's name | Details of that specific client appears |
+| An employee can add a stylist | | A form appears to allow them to enter stylist information | 
+| An employee adds a stylist | Fills out information and selects 'Add Stylist' | Home page loads with new stylist added to the stylist list |
+| An employee can add a client | Clicks on a stylist's name and selects 'Add a client' | A form appears to allow them to enter client information | 
+| An employee adds a client | Fills out information and selects 'Add client'| The stylist's page appears with new client added to their client list |
+| An employee cannot add a client if no stylists are in the system
 
 
 ## Setup/Installation Requirements

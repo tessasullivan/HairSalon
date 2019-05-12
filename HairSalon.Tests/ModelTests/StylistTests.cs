@@ -130,14 +130,38 @@ namespace HairSalon.Tests
       Stylist stylist = new Stylist(firstName, lastName, phoneNumber);
       stylist.Save();
       int stylistId = stylist.GetId();
-      string clientFirstName = "Jack";
-      string clientLastName = "Daniels";
-      string clientPhoneNumber = "253-555-6789";
-      Client client = new Client(clientFirstName, clientLastName, clientPhoneNumber, stylistId);
+      // string clientFirstName = "Jack";
+      // string clientLastName = "Daniels";
+      // string clientPhoneNumber = "253-555-6789";
+      // Client client = new Client(clientFirstName, clientLastName, clientPhoneNumber, stylistId);
+      // client.Save();
+      List<Client> expectedResult = new List<Client> {};
+      // // List<Client> expectedResult = new List<Client> {client};
+      // List<Client> actualResult = stylist.GetClients(stylistId);
+      // System.Console.WriteLine("actual result "+ actualResult);
+
+      Dictionary<string, object> model1 = new Dictionary<string, object>();
+      Stylist stylist2 = Stylist.Find(stylistId);
+      Client client = new Client(firstName, lastName, phoneNumber, stylistId);
       client.Save();
-      List<Client> expectedResult = new List<Client> {client};
-      List<Client> actualResult = stylist.GetClients(stylistId);
-      CollectionAssert.AreEqual(expectedResult, actualResult);
+      List<Client> allClients = stylist2.GetClients(stylistId);
+      System.Console.WriteLine("number in allClients is " + allClients.Count);
+      model1.Add("stylist", stylist2);
+      model1.Add("clients", allClients);
+            System.Console.WriteLine("number in model1 is " + model1.Count);
+            // System.Console.WriteLine("number in model1 clients is " + model1["clients"].Count);
+            System.Console.WriteLine("type " + model1["clients"].GetType());
+
+      // System.Console.WriteLine("get name " + model1["clients"][0].GetFirstName());
+          foreach (string key in model1.Keys)
+            {
+                foreach (Client client1  in model1[key])
+                {
+                    Console.WriteLine(client1.GetFirstName());
+                }
+            }
+
+      CollectionAssert.AreEqual(expectedResult, allClients);
     }
   }
 }
