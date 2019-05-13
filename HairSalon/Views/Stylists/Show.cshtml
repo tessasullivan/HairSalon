@@ -6,7 +6,8 @@
   <a href='/stylists/@Model.GetId()/clients/new'>Add new client</a>
 </nav>
 
-<h3>@Model.GetFirstName() @Model.GetLastName() @Model.GetPhoneNumber()</h3>
+<h3>@Model.GetFirstName() @Model.GetLastName()</h3>
+<p>@Model.GetPhoneNumber()</p>
 
 @if (@Model.GetClients(@Model.GetId()).Count == 0)
 {
