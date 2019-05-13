@@ -155,14 +155,15 @@ namespace HairSalon.Models
       string firstName = "";
       string lastName = "";
       string phoneNumber = "";
+      string notes ="";
       while (rdr.Read())
       {
         dbId = rdr.GetInt32(0);
         firstName = rdr.GetString(1);
         lastName = rdr.GetString(2);
         phoneNumber = rdr.GetString(3);
-        // stylistId = rdr.GetInt32(4);
-        Client client = new Client(firstName, lastName, phoneNumber, stylistId, dbId);
+        notes = rdr.GetString(4);
+        Client client = new Client(firstName, lastName, phoneNumber, notes, stylistId, dbId);
         allClients.Add(client);
       }
       conn.Close();

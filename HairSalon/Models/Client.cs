@@ -10,14 +10,16 @@ namespace HairSalon.Models
     private string _firstName;
     private string _lastName;
     private string _phoneNumber;
+    private string _notes;
     private int _stylistId;
 
-    public Client(string firstName, string lastName, string phoneNumber, int stylistId, int id = 0)
+    public Client(string firstName, string lastName, string phoneNumber, string notes, int stylistId, int id = 0)
     {
       _id = id;
       _firstName = firstName;
       _lastName = lastName;
       _phoneNumber = phoneNumber;
+      _notes = notes;
       _stylistId = stylistId;
     }
     public string GetFirstName()
@@ -44,6 +46,14 @@ namespace HairSalon.Models
     {
       _phoneNumber = phoneNumber;
     }
+    public string GetNotes()
+    {
+      return _notes;
+    }
+    public void SetNotes(string notes)
+    {
+      _notes = notes;
+    }
     public int GetId()
     {
       return _id;
@@ -61,7 +71,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO clients (first_name, last_name, phone_number, stylist_id) VALUES (@FirstName, @LastName, @phoneNumber, @stylistId);";
+      cmd.CommandText = @"INSERT INTO clients (first_name, last_name, phone_number, notes, stylist_id) VALUES (@FirstName, @LastName, @phoneNumber, @Notes, @stylistId);";
       MySqlParameter firstName = new MySqlParameter();
       firstName.ParameterName = "@FirstName";
       firstName.Value = this._firstName;
@@ -74,10 +84,15 @@ namespace HairSalon.Models
       phoneNumber.ParameterName = "@phoneNumber";
       phoneNumber.Value = this._phoneNumber;
       cmd.Parameters.Add(phoneNumber);
+      MySqlParameter notes = new MySqlParameter();
+      notes.ParameterName = "@Notes";
+      notes.Value = this._notes;
+      cmd.Parameters.Add(notes);
       MySqlParameter stylistId = new MySqlParameter();
       stylistId.ParameterName = "@stylistId";
       stylistId.Value = this._stylistId;
       cmd.Parameters.Add(stylistId);
+      Console.WriteLine("Save " + this._notes);
       cmd.ExecuteNonQuery();
       _id = (int) cmd.LastInsertedId;
 
@@ -102,6 +117,7 @@ namespace HairSalon.Models
       string firstName = "";
       string lastName = "";
       string phoneNumber = "";
+      string notes = "";
       int stylistId = 0;
       while (rdr.Read())
       {
@@ -109,9 +125,10 @@ namespace HairSalon.Models
         firstName = rdr.GetString(1);
         lastName = rdr.GetString(2);
         phoneNumber = rdr.GetString(3);
-        stylistId = rdr.GetInt32(4);
+        notes = rdr.GetString(4);
+        stylistId = rdr.GetInt32(5);
       }
-      Client foundClient = new Client(firstName, lastName, phoneNumber, stylistId, dbId);
+      Client foundClient = new Client(firstName, lastName, phoneNumber, notes, stylistId, dbId);
       conn.Close();
       if (conn != null)
       {
@@ -151,7 +168,8 @@ namespace HairSalon.Models
         bool lastNameEquality = (this.GetLastName() == client1.GetLastName());
         bool phoneNumberEquality = (this.GetPhoneNumber() == client1.GetPhoneNumber());
         bool stylistIdEquality = (this.GetStylistId() == client1.GetStylistId());
-        return (idEquality && firstNameEquality && lastNameEquality && phoneNumberEquality && stylistIdEquality);
+        bool notesEquality = (this.GetNotes() == client1.GetNotes());
+        return (idEquality && firstNameEquality && lastNameEquality && phoneNumberEquality && stylistIdEquality && notesEquality);
       }
     }
   }

@@ -40,10 +40,11 @@ namespace HairSalon.Controllers
 
 
     [HttpPost("/stylists/{stylistId}/clients")]
-    public ActionResult Create(string firstName, string lastName, string phoneNumber, int stylistId, int id)
+    public ActionResult Create(string firstName, string lastName, string phoneNumber, string notes, int stylistId, int id)
     {
       Stylist stylist = Stylist.Find(stylistId);
-      Client client = new Client(firstName, lastName, phoneNumber, stylistId, id);
+      Console.WriteLine("Create " + notes);
+      Client client = new Client(firstName, lastName, phoneNumber, notes, stylistId, id);
       client.Save();
       return View("Show", stylist);      
     }
