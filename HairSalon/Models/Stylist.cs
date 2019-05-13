@@ -163,7 +163,7 @@ namespace HairSalon.Models
         lastName = rdr.GetString(2);
         phoneNumber = rdr.GetString(3);
         notes = rdr.GetString(4);
-        Client client = new Client(firstName, lastName, phoneNumber, notes, stylistId, dbId);
+        Client client = new Client(firstName, lastName, phoneNumber, stylistId, notes, dbId);
         allClients.Add(client);
       }
       conn.Close();

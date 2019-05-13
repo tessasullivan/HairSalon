@@ -17,6 +17,7 @@ body {
   background-color: #ccc;
   background-image: url("/img/the-serenity-of-night.jpg");
   background-repeat: no-repeat;
+  /* background-size: cover; */
   color: white;
 }
 th, td {

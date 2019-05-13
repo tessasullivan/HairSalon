@@ -145,7 +145,7 @@ namespace HairSalon.Tests
       string clientLastName = "Daniels";
       string clientPhoneNumber = "253-555-6789";
       string notes = "this is a note";
-      Client client = new Client(clientFirstName, clientLastName, clientPhoneNumber, notes, stylistId);
+      Client client = new Client(clientFirstName, clientLastName, clientPhoneNumber, stylistId, notes);
       client.Save();
       // List<Client> expectedResult = new List<Client> {};
       List<Client> expectedResult = new List<Client> {client};

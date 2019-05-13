@@ -13,7 +13,7 @@ namespace HairSalon.Models
     private string _notes;
     private int _stylistId;
 
-    public Client(string firstName, string lastName, string phoneNumber, string notes, int stylistId, int id = 0)
+    public Client(string firstName, string lastName, string phoneNumber, int stylistId, string notes= "notes", int id = 0)
     {
       _id = id;
       _firstName = firstName;
@@ -68,6 +68,7 @@ namespace HairSalon.Models
     }
     public void Save()
     {
+      System.Console.WriteLine("notes "+ _notes);
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
@@ -92,7 +93,6 @@ namespace HairSalon.Models
       stylistId.ParameterName = "@stylistId";
       stylistId.Value = this._stylistId;
       cmd.Parameters.Add(stylistId);
-      Console.WriteLine("Save " + this._notes);
       cmd.ExecuteNonQuery();
       _id = (int) cmd.LastInsertedId;
 
@@ -128,7 +128,11 @@ namespace HairSalon.Models
         notes = rdr.GetString(4);
         stylistId = rdr.GetInt32(5);
       }
-      Client foundClient = new Client(firstName, lastName, phoneNumber, notes, stylistId, dbId);
+      if (notes == "Notes")
+      {
+        notes = "";
+      }
+      Client foundClient = new Client(firstName, lastName, phoneNumber, stylistId, notes, dbId);
       conn.Close();
       if (conn != null)
       {

@@ -37,14 +37,16 @@ namespace HairSalon.Controllers
       return RedirectToAction("Index", allStylists);
     }
 
-
-
+    // This method adds a new client and then returns user to the specific stylist page
     [HttpPost("/stylists/{stylistId}/clients")]
     public ActionResult Create(string firstName, string lastName, string phoneNumber, string notes, int stylistId, int id)
     {
       Stylist stylist = Stylist.Find(stylistId);
-      Console.WriteLine("Create " + notes);
-      Client client = new Client(firstName, lastName, phoneNumber, notes, stylistId, id);
+      if (String.IsNullOrEmpty(notes))
+      {
+        notes="";
+      }
+      Client client = new Client(firstName, lastName, phoneNumber, stylistId, notes, id);
       client.Save();
       return View("Show", stylist);      
     }

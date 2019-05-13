@@ -24,7 +24,7 @@ namespace HairSalon.Tests
       string phoneNumber = "253-555-6789";
       string notes = "this is a note";
       int stylistId = 1;
-      Client client = new Client(firstName, lastName, phoneNumber, notes, stylistId);
+      Client client = new Client(firstName, lastName, phoneNumber, stylistId, notes);
       Assert.AreEqual(typeof(Client), client.GetType());
     }
     [TestMethod]
@@ -35,7 +35,7 @@ namespace HairSalon.Tests
       string phoneNumber = "253-555-6789";
       string notes = "this is a note";
       int stylistId = 1;
-      Client client = new Client(firstName, lastName, phoneNumber, notes, stylistId);
+      Client client = new Client(firstName, lastName, phoneNumber, stylistId, notes);
       string actualResult = client.GetFirstName();
       Assert.AreEqual(firstName, actualResult);      
     } 
@@ -47,7 +47,7 @@ namespace HairSalon.Tests
       string phoneNumber = "253-555-6789";
       string notes = "this is a note";
       int stylistId = 1;
-      Client client = new Client(firstName, lastName, phoneNumber, notes, stylistId);
+      Client client = new Client(firstName, lastName, phoneNumber, stylistId, notes);
       string actualResult = client.GetLastName();
       Assert.AreEqual(lastName, actualResult);      
     }  
@@ -59,7 +59,7 @@ namespace HairSalon.Tests
       string phoneNumber = "253-555-6789";
       string notes = "this is a note";
       int stylistId = 1;
-      Client client = new Client(firstName, lastName, phoneNumber, notes, stylistId);
+      Client client = new Client(firstName, lastName, phoneNumber, stylistId, notes);
       string newFirstName = "Jill";
       client.SetFirstName(newFirstName);
       string actualResult = client.GetFirstName();
@@ -73,7 +73,7 @@ namespace HairSalon.Tests
       string phoneNumber = "253-555-6789";
       string notes = "this is a note";
       int stylistId = 1;
-      Client client = new Client(firstName, lastName, phoneNumber, notes, stylistId);
+      Client client = new Client(firstName, lastName, phoneNumber, stylistId, notes);
       string newLastName = "Beam";
       client.SetLastName(newLastName);
       string actualResult = client.GetLastName();
@@ -87,7 +87,7 @@ namespace HairSalon.Tests
       string phoneNumber = "253-555-6789";
       string notes = "this is a note";
       int stylistId = 1;
-      Client client = new Client(firstName, lastName, phoneNumber, notes, stylistId);
+      Client client = new Client(firstName, lastName, phoneNumber, stylistId, notes);
       string actualResult = client.GetPhoneNumber();
       Assert.AreEqual(phoneNumber, actualResult);
     }
@@ -99,7 +99,7 @@ namespace HairSalon.Tests
       string phoneNumber = "253-555-6789";
       string notes = "this is a note";
       int stylistId = 1;
-      Client client = new Client(firstName, lastName, phoneNumber, notes, stylistId);
+      Client client = new Client(firstName, lastName, phoneNumber, stylistId, notes);
       string newPhoneNumber = "425-666-0000";
       client.SetPhoneNumber(newPhoneNumber);
       string actualResult = client.GetPhoneNumber();
@@ -113,7 +113,7 @@ namespace HairSalon.Tests
       string phoneNumber = "253-555-6789";
       string notes = "this is a note";
       int stylistId = 1;
-      Client client = new Client(firstName, lastName, phoneNumber, notes, stylistId);
+      Client client = new Client(firstName, lastName, phoneNumber, stylistId, notes);
       client.Save();
       int clientId = client.GetId();
       Client actualResult = Client.Find(clientId);
