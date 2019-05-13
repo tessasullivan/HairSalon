@@ -13,7 +13,12 @@ namespace HairSalon.Controllers
       List<Stylist> allStylists = Stylist.GetAll();
       return View(allStylists);
     }
-
+    [HttpGet("/stylists/{id}")]
+    public ActionResult Show(int id)
+    {
+      Stylist stylist = Stylist.Find(id);
+      return View(stylist);
+    }
     //Displays form for adding a stylist
     [HttpGet("/stylists/new")]
     public ActionResult New()
@@ -32,12 +37,7 @@ namespace HairSalon.Controllers
       return RedirectToAction("Index", allStylists);
     }
 
-    [HttpGet("/stylists/{id}")]
-    public ActionResult Show(int stylistId)
-    {
-      Stylist stylist = Stylist.Find(stylistId);
-      return View(stylist);
-    }
+
 
     [HttpPost("/stylists/{stylistId}/clients")]
     public ActionResult Create(string firstName, string lastName, string phoneNumber, int stylistId, int id)

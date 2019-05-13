@@ -111,6 +111,7 @@ namespace HairSalon.Tests
       Stylist stylist = new Stylist(firstName, lastName, phoneNumber);
       stylist.Save();
       int stylistId = stylist.GetId();
+      System.Console.WriteLine("stylist id "+ stylistId);
       Stylist actualResult = Stylist.Find(stylistId);
       Assert.AreEqual(stylist, actualResult);
     }
