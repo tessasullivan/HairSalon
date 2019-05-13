@@ -1,0 +1,20 @@
+@{
+  Layout = "_Layout";
+}
+@using HairSalon.Models;
+
+<h2>Stylist @Model["stylist"].GetFirstName() 
+@Model["stylist"].GetLastName()</h2>
+@if (Model.Count == 0)
+{
+    <p>Currently, this stylist does not have any clients.</p>
+}
+@if(Model.Count != 0)
+{
+  <p>@Model.Count</p>
+    @foreach ( Client client in @Model["clients"])
+    {
+      <p>inside foreach loop</p>
+        <a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'>@client.GetFirstName() @client.GetLastName()</a>
+    }
+}

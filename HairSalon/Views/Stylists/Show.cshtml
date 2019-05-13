@@ -3,18 +3,9 @@
 }
 @using HairSalon.Models;
 
-<h2>Stylist @Model["stylist"].GetFirstName() 
-@Model["stylist"].GetLastName()</h2>
-@if (Model.Count == 0)
-{
-    <p>Currently, this stylist does not have any clients.</p>
-}
-@if(Model.Count != 0)
-{
-  <p> model count != 0</p>
-    @foreach ( Client client in @Model["clients"])
+<p>@Model.GetFirstName() @Model.GetLastName()</p>
+    @foreach ( Client client in @Model.GetClients(Model.GetId()))
     {
-      <p>inside foreach loop</p>
-        <a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'>@client.GetFirstName() @client.GetLastName()</a>
+        <a href='/stylists/@Model.GetId()/clients/@client.GetId()'>@client.GetFirstName() @client.GetLastName()</a>
     }
-}
+

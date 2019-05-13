@@ -32,15 +32,22 @@ namespace HairSalon.Controllers
       return RedirectToAction("Index", allStylists);
     }
 
+    // [HttpGet("/stylists/{id}")]
+    // public ActionResult Show(int stylistId)
+    // {
+    //   Dictionary<string, object> model = new Dictionary<string, object>();
+    //   Stylist stylist = Stylist.Find(stylistId);
+    //   List<Client> clientList = stylist.GetClients(stylistId);
+    //   model.Add("stylist", stylist);
+    //   model.Add("clients", clientList);
+    //   return View(model);
+    // }
+
     [HttpGet("/stylists/{id}")]
     public ActionResult Show(int stylistId)
     {
-      Dictionary<string, object> model = new Dictionary<string, object>();
       Stylist stylist = Stylist.Find(stylistId);
-      List<Client> clientList = stylist.GetClients(stylistId);
-      model.Add("stylist", stylist);
-      model.Add("clients", clientList);
-      return View(model);
+      return View(stylist);
     }
 
     // This one creates new Clients with a given Stylist, not new stylists and then displays the stylist with all their clients
