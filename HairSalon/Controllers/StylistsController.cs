@@ -32,17 +32,6 @@ namespace HairSalon.Controllers
       return RedirectToAction("Index", allStylists);
     }
 
-    // [HttpGet("/stylists/{id}")]
-    // public ActionResult Show(int stylistId)
-    // {
-    //   Dictionary<string, object> model = new Dictionary<string, object>();
-    //   Stylist stylist = Stylist.Find(stylistId);
-    //   List<Client> clientList = stylist.GetClients(stylistId);
-    //   model.Add("stylist", stylist);
-    //   model.Add("clients", clientList);
-    //   return View(model);
-    // }
-
     [HttpGet("/stylists/{id}")]
     public ActionResult Show(int stylistId)
     {
@@ -50,19 +39,13 @@ namespace HairSalon.Controllers
       return View(stylist);
     }
 
-    // This one creates new Clients with a given Stylist, not new stylists and then displays the stylist with all their clients
     [HttpPost("/stylists/{stylistId}/clients")]
     public ActionResult Create(string firstName, string lastName, string phoneNumber, int stylistId, int id)
     {
-      Dictionary<string, object> model = new Dictionary<string, object>();
       Stylist stylist = Stylist.Find(stylistId);
       Client client = new Client(firstName, lastName, phoneNumber, stylistId, id);
       client.Save();
-      List<Client> allClients = stylist.GetClients(stylistId);
-      model.Add("stylist", stylist);
-      model.Add("clients", allClients);
-      return View("Show", model);
+      return View("Show", stylist);      
     }
-
   }
 }

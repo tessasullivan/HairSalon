@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `clients`
 --
-
+use tessa_sullivan_test;
 CREATE TABLE `clients` (
   `id` int(11) NOT NULL,
   `first_name` varchar(255) NOT NULL,
