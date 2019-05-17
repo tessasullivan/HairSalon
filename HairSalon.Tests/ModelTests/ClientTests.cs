@@ -175,5 +175,23 @@ namespace HairSalon.Tests
       List<Client> actual = Client.GetAll();
       CollectionAssert.AreEqual(expected, actual);
     }
+    [TestMethod]
+    public void GetStylistName_ReturnsStylistName_String()
+    {
+      string stylistFirst = "Jack";
+      string stylistLast = "Daniels";
+      string stylistPhone = "253-555-6789";
+      string clientFirst = "Jim";
+      string clientLast = "Beam";
+      string clientPhone = "425-433-5869";
+      string notes = "this is a note";
+      Stylist stylist = new Stylist(stylistFirst, stylistLast, stylistPhone);
+      stylist.Save();
+      Client client = new Client(clientFirst, clientLast, clientPhone, stylist.GetId(), notes);
+      client.Save();
+      string expected = stylistFirst + " " + stylistLast;
+      string actual = client.GetStylistName(stylist.GetId());
+      Assert.AreEqual(expected, actual);
+    }
   }
 }

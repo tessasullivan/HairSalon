@@ -1,0 +1,31 @@
+@{ Layout = "_Layout";}
+@using HairSalon.Models;
+<h3>Clients</h3>
+
+
+
+@if (Model.Count == 0)
+{
+  <p>No clients have been added yet</p>
+}
+@if(Model.Count != 0)
+{
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Phone Number</th>
+      <th>Stylist</th>
+    </tr>
+  @foreach (Client client in Model)
+  {
+    <tr>
+      <td><a href='/stylists/@client.GetStylistId()/clients/@client.GetId()'>@client.GetFirstName() @client.GetLastName()</a></td>
+      <td>@client.GetPhoneNumber()</td>
+      <td><a href='/stylists/@client.GetStylistId()'>@client.GetStylistName(@client.GetStylistId())</a></td>
+    </tr>
+  }
+  </table>
+}
+<nav class="bottom">
+  <a href='/clients/deleteAll'>Delete All</a>
+</nav>

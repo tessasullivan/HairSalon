@@ -1,5 +1,19 @@
 @{
   Layout = "_Layout";
 }
-<p class="intro">@Model.GetFirstName() @Model.GetLastName() @Model.GetPhoneNumber()</p>
-<p>@Model.GetNotes()</p>
+
+@using HairSalon.Models;
+
+<table>
+  <tr>
+    <td>@Model.GetFirstName() @Model.GetLastName()</td>
+    <td>@Model.GetPhoneNumber()</td>
+    <td><a href='/stylists/@Model.GetStylistId()'>@Model.GetStylistName(@Model.GetStylistId())</a></td>
+  </tr>
+  <tr>
+    <td colspan="3">@Model.GetNotes()</td>
+  </tr>
+</table>
+<nav class="bottom">
+  <a href='/stylists/@Model.GetStylistId()/clients/@Model.GetId()/delete'>Delete client</a>
+</nav>

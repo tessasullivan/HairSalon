@@ -1,0 +1,12 @@
+@{Layout = "_Layout";}
+@using HairSalon.Models;
+<h2>Delete Clients</h2>
+<p> Are you sure you want to delete all of the clients?</p>
+
+   
+
+
+<form action='/clients/deleteAll' method='post'>
+  <button type='submit'>Delete</button>
+  <a href='/clients' class="button">Cancel</a>
+</form>

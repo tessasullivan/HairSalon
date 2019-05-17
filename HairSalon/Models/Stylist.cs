@@ -82,7 +82,8 @@ namespace HairSalon.Models
         bool lastNameEquality = (this.GetLastName() == stylist1.GetLastName());
         return (idEquality && firstNameEquality && lastNameEquality);
       }
-    }    public static Stylist Find(int id)
+    }    
+    public static Stylist Find(int id)
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();

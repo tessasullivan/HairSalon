@@ -74,6 +74,7 @@ namespace HairSalon.Controllers
       return View("Index", allStylists);
     }
 
+    // Ask for confirmation to delete all stylists and clients
     [HttpGet("/stylists/deleteall")]
     public ActionResult DeleteAll()
     {

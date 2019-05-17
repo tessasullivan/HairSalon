@@ -1,0 +1,8 @@
+@{Layout = "_Layout";}
+@using HairSalon.Models;
+<h2>Delete Client</h2>
+<p> Are you sure you want to delete @Model.GetFirstName() @Model.GetLastName()?</p>
+
+<form action='/stylists/@Model.GetStylistId()/clients/@Model.GetId()/delete' method='post'>
+  <button type='submit'>Delete</button>
+</form>
