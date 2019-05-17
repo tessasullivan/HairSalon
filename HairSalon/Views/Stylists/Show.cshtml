@@ -1,19 +1,15 @@
-@{
-  Layout = "_Layout";
-}
+@{Layout = "_Layout";}
 @using HairSalon.Models;
-<nav>
-  <a href='/stylists/@Model.GetId()/clients/new'>Add new client</a>
-</nav>
+
 
 <h3>@Model.GetFirstName() @Model.GetLastName()</h3>
 <p>@Model.GetPhoneNumber()</p>
 
-@if (@Model.GetClients(@Model.GetId()).Count == 0)
+@if (@Model.GetClients().Count == 0)
 {
   <p>Currently, this stylist does not have any clients</p>
 }
-@if (@Model.GetClients(@Model.GetId()).Count != 0)
+@if (@Model.GetClients().Count != 0)
 {
   <table>
     <tr>
@@ -21,7 +17,7 @@
       <th>Phone</th>
     </tr>
  
-      @foreach ( Client client in @Model.GetClients(Model.GetId()))
+      @foreach ( Client client in @Model.GetClients())
       {
         <tr>
           <td><a href='/stylists/@Model.GetId()/clients/@client.GetId()'>@client.GetFirstName() @client.GetLastName()</a></td>
@@ -31,3 +27,8 @@
  </table>
 
 }
+<nav>
+  <a href='/stylists/@Model.GetId()/clients/new'>Add new client</a>
+  <a href='/stylists/@Model.GetId()/delete'>Delete Stylist</a>
+  <a href='/stylists/deleteAll'>Delete All</a>
+</nav>

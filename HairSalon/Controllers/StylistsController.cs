@@ -50,5 +50,28 @@ namespace HairSalon.Controllers
       client.Save();
       return View("Show", stylist);      
     }
+
+    // Ask for confirmation of delete
+    [HttpGet("/stylists/{id}/delete")]
+    public ActionResult Delete(int id)
+    {
+      Stylist stylist = Stylist.Find(id);
+      return View(stylist);
+    }
+
+    // Delete an individual stylist along with their clients and return to list of stylists
+    [HttpPost("/stylists/{id}/delete")]
+    public ActionResult DeleteStylist(int id)
+    {
+      Stylist stylist = Stylist.Find(id);
+      List<Client> clients = stylist.GetClients();
+      foreach (Client client in clients)
+      {
+        client.Delete();
+      }
+      stylist.Delete();
+      List<Stylist> allStylists = Stylist.GetAll();
+      return View("Index", allStylists);
+    }
   }
 }

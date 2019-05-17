@@ -1,0 +1,14 @@
+@{Layout = "_Layout";}
+@using HairSalon.Models;
+<h2>Delete Stylist</h2>
+<p> Are you sure you want to delete @Model.GetFirstName() @Model.GetLastName() along with their clients?</p>
+
+<ul>
+  @foreach (Client client in @Model.GetClients())
+  {
+    <li><a href='/stylists/@Model.GetId()/clients/@client.GetId()'>@client.GetFirstName() @client.GetLastName()</a></li>
+  }
+</ul>
+<form action='/stylists/@Model.GetId()/delete' method='post'>
+  <button type='submit'>Delete</button>
+</form>
