@@ -12,7 +12,7 @@ namespace HairSalon.Tests
   {
     public void Dispose()
     {
-      Client.ClearAll();
+      Client.DeleteAll();
     }
     public ClientsControllerTests()
     {

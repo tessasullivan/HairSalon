@@ -51,7 +51,38 @@ namespace HairSalon.Models
     {
       _clients.Add(client);
     }
-    public static Stylist Find(int id)
+    public static void DeleteAll()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM stylists;";
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+    public override int GetHashCode()
+    {
+      return this.GetId().GetHashCode();
+    }
+    public override bool Equals(System.Object stylist2)
+    {
+      if (!(stylist2 is Stylist))
+      {
+        return false;
+      }
+      else 
+      {
+        Stylist stylist1 = (Stylist) stylist2;
+        bool idEquality = (this.GetId() == stylist1.GetId());
+        bool firstNameEquality = (this.GetFirstName() == stylist1.GetFirstName());
+        bool lastNameEquality = (this.GetLastName() == stylist1.GetLastName());
+        return (idEquality && firstNameEquality && lastNameEquality);
+      }
+    }    public static Stylist Find(int id)
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
@@ -137,7 +168,7 @@ namespace HairSalon.Models
       }
       return allStylists;
     }
-    public List<Client> GetClients(int stylistId)
+    public List<Client> GetClients()
     {
       List<Client> allClients = new List<Client> {};
 
@@ -147,7 +178,7 @@ namespace HairSalon.Models
       cmd.CommandText = @"SELECT * FROM clients where stylist_id = (@stylist_id);";
       MySqlParameter stylist_id = new MySqlParameter();
       stylist_id.ParameterName = "@stylist_id";
-      stylist_id.Value = stylistId;
+      stylist_id.Value = _id;
       cmd.Parameters.Add(stylist_id);
 
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
@@ -163,7 +194,8 @@ namespace HairSalon.Models
         lastName = rdr.GetString(2);
         phoneNumber = rdr.GetString(3);
         notes = rdr.GetString(4);
-        Client client = new Client(firstName, lastName, phoneNumber, stylistId, notes, dbId);
+
+        Client client = new Client(firstName, lastName, phoneNumber, _id, notes, dbId);
         allClients.Add(client);
       }
       conn.Close();
@@ -173,17 +205,13 @@ namespace HairSalon.Models
       }
       return allClients;
     }
-
-
-    public void Delete(int id)
+    public void Delete()
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = @"DELETE FROM stylists where id = (@id);";
-      MySqlParameter thisId = new MySqlParameter();
-      thisId.ParameterName = "@id";
-      thisId.Value = id;
+      MySqlParameter thisId = new MySqlParameter("@id", _id);
       cmd.Parameters.Add(thisId);
       cmd.ExecuteNonQuery();
       conn.Close();
@@ -191,38 +219,6 @@ namespace HairSalon.Models
       {
         conn.Dispose();
       }
-    }
-    public static void ClearAll()
-    {
-      MySqlConnection conn = DB.Connection();
-      conn.Open();
-      var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM stylists;";
-      cmd.ExecuteNonQuery();
-      conn.Close();
-      if (conn != null)
-      {
-        conn.Dispose();
-      }
-    }
-    public override int GetHashCode()
-    {
-      return this.GetId().GetHashCode();
-    }
-    public override bool Equals(System.Object stylist2)
-    {
-      if (!(stylist2 is Stylist))
-      {
-        return false;
-      }
-      else 
-      {
-        Stylist stylist1 = (Stylist) stylist2;
-        bool idEquality = (this.GetId() == stylist1.GetId());
-        bool firstNameEquality = (this.GetFirstName() == stylist1.GetFirstName());
-        bool lastNameEquality = (this.GetLastName() == stylist1.GetLastName());
-        return (idEquality && firstNameEquality && lastNameEquality);
-      }
-    }
+    } 
   }
 }

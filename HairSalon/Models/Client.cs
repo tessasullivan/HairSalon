@@ -66,6 +66,28 @@ namespace HairSalon.Models
     {
       _stylistId = stylistId;
     }
+    public override int GetHashCode()
+    {
+      return this.GetId().GetHashCode();
+    }
+    public override bool Equals(System.Object client2)
+    {
+      if (!(client2 is Client))
+      {
+        return false;
+      }
+      else 
+      {
+        Client client1 = (Client) client2;
+        bool idEquality = (this.GetId() == client1.GetId());
+        bool firstNameEquality = (this.GetFirstName() == client1.GetFirstName());
+        bool lastNameEquality = (this.GetLastName() == client1.GetLastName());
+        bool phoneNumberEquality = (this.GetPhoneNumber() == client1.GetPhoneNumber());
+        bool stylistIdEquality = (this.GetStylistId() == client1.GetStylistId());
+        bool notesEquality = (this.GetNotes() == client1.GetNotes());
+        return (idEquality && firstNameEquality && lastNameEquality && phoneNumberEquality && stylistIdEquality && notesEquality);
+      }
+    }
     public void Save()
     {
       System.Console.WriteLine("notes "+ _notes);
@@ -140,8 +162,50 @@ namespace HairSalon.Models
       }
       return foundClient;
     }
-
-    public static void ClearAll()
+    public void Delete()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM clients where id = (@id);";
+      MySqlParameter thisId = new MySqlParameter("@id", _id);
+      cmd.Parameters.Add(thisId);
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+    public static List<Client> GetAll()
+    {
+      List<Client> allClients = new List<Client> {};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM clients;";
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+      int dbId = 0;
+      string firstName = "";
+      string lastName = "";
+      string phoneNumber = "";
+      while (rdr.Read())
+      {
+        dbId = rdr.GetInt32(0);
+        firstName = rdr.GetString(1);
+        lastName = rdr.GetString(2);
+        phoneNumber = rdr.GetString(3);
+        Client client = new Client(firstName, lastName, phoneNumber, dbId);
+        allClients.Add(client);
+      }
+      conn.Close();
+      if (conn != null)
+      {
+          conn.Dispose();
+      }
+      return allClients;          
+    }
+    public static void DeleteAll()
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
@@ -152,28 +216,6 @@ namespace HairSalon.Models
       if (conn != null)
       {
         conn.Dispose();
-      }
-    }
-    public override int GetHashCode()
-    {
-      return this.GetId().GetHashCode();
-    }
-    public override bool Equals(System.Object client2)
-    {
-      if (!(client2 is Client))
-      {
-        return false;
-      }
-      else 
-      {
-        Client client1 = (Client) client2;
-        bool idEquality = (this.GetId() == client1.GetId());
-        bool firstNameEquality = (this.GetFirstName() == client1.GetFirstName());
-        bool lastNameEquality = (this.GetLastName() == client1.GetLastName());
-        bool phoneNumberEquality = (this.GetPhoneNumber() == client1.GetPhoneNumber());
-        bool stylistIdEquality = (this.GetStylistId() == client1.GetStylistId());
-        bool notesEquality = (this.GetNotes() == client1.GetNotes());
-        return (idEquality && firstNameEquality && lastNameEquality && phoneNumberEquality && stylistIdEquality && notesEquality);
       }
     }
   }

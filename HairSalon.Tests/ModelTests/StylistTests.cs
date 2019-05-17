@@ -10,7 +10,7 @@ namespace HairSalon.Tests
   {
     public void Dispose()
     {
-      Stylist.ClearAll();
+      Stylist.DeleteAll();
     }
     public StylistTests()
     {
@@ -149,8 +149,39 @@ namespace HairSalon.Tests
       client.Save();
       // List<Client> expectedResult = new List<Client> {};
       List<Client> expectedResult = new List<Client> {client};
-      List<Client> actualResult = stylist.GetClients(stylistId);
+      List<Client> actualResult = stylist.GetClients();
       System.Console.WriteLine(actualResult[0].GetId());
+      CollectionAssert.AreEqual(expectedResult, actualResult);
+    }
+    [TestMethod]
+    public void Delete_DeletesStylistFromDB_EmptyStylistList()
+    {
+      string firstName = "Sylvia";
+      string lastName = "Green";
+      string phoneNumber = "206-555-6789";
+      Stylist stylist = new Stylist(firstName, lastName, phoneNumber);
+      stylist.Save();
+      stylist.Delete();
+      List<Stylist> expected = new List<Stylist> {};
+      List<Stylist> actual = Stylist.GetAll();
+      CollectionAssert.AreEqual(expected, actual);
+    }
+    [TestMethod]
+    public void DeleteAll_DeletesAllStylistsFromDB_EmptyStylistList()
+    {
+      string firstName = "Sylvia";
+      string lastName = "Green";
+      string phoneNumber = "206-555-6789";
+      Stylist stylist = new Stylist(firstName, lastName, phoneNumber);
+      stylist.Save();
+      string firstName2 = "Michael";
+      string lastName2 = "Hunt";
+      string phoneNumber2 = "206-666-6789";
+      Stylist stylist2 = new Stylist(firstName2, lastName2, phoneNumber2);
+      stylist2.Save();
+      Stylist.DeleteAll();
+      List<Stylist> expectedResult = new List<Stylist> {};
+      List<Stylist>actualResult = Stylist.GetAll();
       CollectionAssert.AreEqual(expectedResult, actualResult);
     }
   }
