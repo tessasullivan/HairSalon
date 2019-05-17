@@ -1,0 +1,22 @@
+@{Layout = "_Layout";}
+@using HairSalon.Models;
+<h2>Delete Stylists</h2>
+<p> Are you sure you want to delete all of the stylists with their clients?  Currently, you have the following stylists and clients:</p>
+  
+@foreach (Stylist stylist in Stylist.GetAll())
+{
+  <p>@stylist.GetFirstName() @stylist.GetLastName():</p>
+  <ul>
+    @foreach (Client client in @stylist.GetClients())
+    {
+      <li><a href='/stylists/@stylist.GetId()/clients/@client.GetId()'>@client.GetFirstName() @client.GetLastName()</a></li>
+    }
+  </ul>
+}
+   
+
+
+<form action='/stylists/deleteAll' method='post'>
+  <button type='submit'>Delete</button>
+  <a href='/stylists' class="button">Cancel</a>
+</form>

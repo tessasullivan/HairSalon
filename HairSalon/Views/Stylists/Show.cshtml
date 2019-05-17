@@ -2,8 +2,12 @@
 @using HairSalon.Models;
 
 
-<h3>@Model.GetFirstName() @Model.GetLastName()</h3>
-<p>@Model.GetPhoneNumber()</p>
+<table>
+  <tr>
+    <td><strong>@Model.GetFirstName() @Model.GetLastName() </strong></td>
+    <td>@Model.GetPhoneNumber()</td>
+  </tr>
+</table>
 
 @if (@Model.GetClients().Count == 0)
 {
@@ -27,7 +31,7 @@
  </table>
 
 }
-<nav>
+<nav class="bottom">
   <a href='/stylists/@Model.GetId()/clients/new'>Add new client</a>
   <a href='/stylists/@Model.GetId()/delete'>Delete Stylist</a>
   <a href='/stylists/deleteAll'>Delete All</a>

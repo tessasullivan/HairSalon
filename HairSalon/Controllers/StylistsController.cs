@@ -73,5 +73,20 @@ namespace HairSalon.Controllers
       List<Stylist> allStylists = Stylist.GetAll();
       return View("Index", allStylists);
     }
+
+    [HttpGet("/stylists/deleteall")]
+    public ActionResult DeleteAll()
+    {
+      return View();
+    }
+    [HttpPost("/stylists/deleteAll")]
+    public ActionResult DeleteEveryOne()
+    {
+      Stylist.DeleteAll();
+      Client.DeleteAll();
+      List<Stylist> allStylists = Stylist.GetAll();
+      return View("Index", allStylists);
+    }
+
   }
 }

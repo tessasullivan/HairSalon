@@ -1,18 +1,26 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: May 13, 2019 at 07:59 PM
--- Server version: 5.6.38
--- PHP Version: 7.2.1
+-- Generation Time: May 17, 2019 at 06:15 PM
+-- Server version: 5.7.25
+-- PHP Version: 7.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-use tessa_sullivan;
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
 -- Database: `tessa_sullivan`
 --
+CREATE DATABASE IF NOT EXISTS `tessa_sullivan` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `tessa_sullivan`;
 
 -- --------------------------------------------------------
 
@@ -37,7 +45,17 @@ INSERT INTO `clients` (`id`, `first_name`, `last_name`, `phone_number`, `notes`,
 (9, 'Judith', 'Monroe', '206=867-5309', 'Double-process, use brand X for color, mix 75% Sapphire and 25% Amethyst', 5),
 (10, 'Hannah', 'Chance', '206-555-4930', '', 5),
 (11, 'Fiona', 'Hardingham', '425-355-9009', 'Notes', 5),
-(12, 'Katherine', 'Kellgren', '832-899-3421', 'Notes', 5);
+(12, 'Katherine', 'Kellgren', '832-899-3421', 'Notes', 5),
+(14, 'Susan', 'Duerden', '206-619-9391', 'Prefers Brand Happy Color Canary Yellow', 10),
+(15, 'Kate', 'Reading', '253-435-9040', '', 10),
+(16, 'John', 'Lennon', '425-366-4039', '', 11),
+(17, 'Paul', 'McCartney', '425-660-5043', '', 11),
+(18, 'George', 'Harrison', '425-660-5044', '', 11),
+(19, 'Ringo', 'Starr', '425-679-2424', '', 11),
+(20, 'Ned', 'Henry', '425-870-4367', '', 12),
+(21, 'Verity', 'Kindle', '832-395-3940', '', 12),
+(22, 'Sandra', 'Foster', '919-619-9391', '', 12),
+(23, 'Bennett', 'O\'Reilly', '206-786-4429', '', 12);
 
 -- --------------------------------------------------------
 
@@ -58,7 +76,9 @@ CREATE TABLE `stylists` (
 
 INSERT INTO `stylists` (`id`, `first_name`, `last_name`, `phone_number`) VALUES
 (5, 'Greg', 'Johnson', '206-867-5309'),
-(6, 'Fred', 'Mercury', '253-456-7890');
+(10, 'Katie', 'Dior', '832-455-9803'),
+(11, 'Lucy', 'Diamond', '206-242-3356'),
+(12, 'Connie', 'Willis', '206-544-3042');
 
 --
 -- Indexes for dumped tables
@@ -84,10 +104,14 @@ ALTER TABLE `stylists`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `stylists`
 --
 ALTER TABLE `stylists`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
