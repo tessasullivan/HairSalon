@@ -1,0 +1,15 @@
+@{
+  Layout = "_Layout";
+}
+@using HairSalon.Models;
+<h2>Edit stylist</h2>
+
+<form action="/stylists/@Model.GetId()" method="post">
+  <label for='first'>First </label>
+  <input id='first' name='first' type='text' required value="@Model.GetFirstName()"><br />
+  <label for='last'>Last </label>
+  <input id='last' name='last' type='text' required value="@Model.GetLastName()"><br />
+  <label for='phone'>Phone   </label>
+  <input id='phone' name='phone' type='text' required value="@Model.GetPhoneNumber()"><br />
+  <button type="submit">Update</button>
+</form>

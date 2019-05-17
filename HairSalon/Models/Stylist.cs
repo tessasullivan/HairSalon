@@ -220,6 +220,32 @@ namespace HairSalon.Models
       {
         conn.Dispose();
       }
-    } 
+    }
+    public void Edit(string first, string last, string phone)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText=@"UPDATE stylists SET first_name = @first, last_name = @last, phone_number=@phone WHERE id = @thisId;";
+      
+      MySqlParameter firstName = new MySqlParameter("@first", first);      
+      MySqlParameter lastName = new MySqlParameter("@last", last);      
+      MySqlParameter phoneNumber = new MySqlParameter("@phone", phone);
+      MySqlParameter thisId = new MySqlParameter("@thisId", _id);      
+      cmd.Parameters.Add(firstName);    
+      cmd.Parameters.Add(lastName);    
+      cmd.Parameters.Add(phoneNumber);
+      cmd.Parameters.Add(thisId);
+
+      cmd.ExecuteNonQuery();
+      _firstName = first;
+      _lastName = last;
+      _phoneNumber = phone;
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }      
+    }
   }
 }
