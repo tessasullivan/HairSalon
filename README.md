@@ -37,7 +37,7 @@ This application will allow salon employees to manage the salon's stylists and c
 
 
 ## Known Issues
-* The page which gives details about a stylist's client list does not always list details.
+* 
 
 ## Technologies Used
 

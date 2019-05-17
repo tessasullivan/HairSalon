@@ -22,6 +22,23 @@ namespace HairSalon.Controllers
       return View(stylist);
     }
 
+    //Displays edit form
+    [HttpGet("/stylists/{stylistId}/clients/{clientId}/edit")]
+    public ActionResult Edit(int stylistId, int clientId)
+    {
+      Client client = Client.Find(clientId);
+      return View(client);
+    }
+
+    //Edits client information
+    [HttpPost("/stylists/{stylistId}/clients/{clientId}")]
+    public ActionResult Update(int stylistId, int clientId, string firstName, string lastName, string phoneNumber, string notes)
+    {
+      Client client = Client.Find(clientId);
+      client.Edit(firstName, lastName, phoneNumber, stylistId, notes);
+      return View("Show", client);
+    }
+
     [HttpGet("stylists/{stylistId}/clients/{clientId}")]
     public ActionResult Show(int clientId)
     {

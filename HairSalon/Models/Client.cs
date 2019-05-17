@@ -244,5 +244,40 @@ namespace HairSalon.Models
       }
       return firstName + " " + lastName;
     }
+    public void Edit(string first, string last, string phone, int stylistId, string notes)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText=@"UPDATE clients 
+        SET first_name = @first, last_name = @last, phone_number=@phone, notes=@notes, stylist_id = @stylistId 
+        WHERE id = @thisId;";
+      
+      MySqlParameter firstName = new MySqlParameter("@first", first);      
+      MySqlParameter lastName = new MySqlParameter("@last", last);      
+      MySqlParameter phoneNumber = new MySqlParameter("@phone", phone);
+      MySqlParameter notesParameter = new MySqlParameter("@notes", notes);
+      MySqlParameter thisId = new MySqlParameter("@thisId", _id);      
+      MySqlParameter thisStylistId = new MySqlParameter("@stylistId", stylistId);      
+      cmd.Parameters.Add(firstName);    
+      cmd.Parameters.Add(lastName);    
+      cmd.Parameters.Add(phoneNumber);
+      cmd.Parameters.Add(notesParameter);
+      cmd.Parameters.Add(thisId);
+      cmd.Parameters.Add(thisStylistId);
+
+      cmd.ExecuteNonQuery();
+      _firstName = first;
+      _lastName = last;
+      _phoneNumber = phone;
+      _notes = notes;
+      _stylistId = stylistId;
+
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }      
+    }
   }
 }

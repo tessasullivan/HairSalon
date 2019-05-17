@@ -4,7 +4,7 @@
 
 <table>
   <tr>
-    <td><strong>@Model.GetFirstName() @Model.GetLastName() </strong></td>
+    <td><strong><a href='/stylists/@Model.GetId()/edit'>@Model.GetFirstName() @Model.GetLastName() </a></strong></td>
     <td>@Model.GetPhoneNumber()</td>
   </tr>
 </table>
@@ -26,7 +26,8 @@
         <tr>
           <td><a href='/stylists/@Model.GetId()/clients/@client.GetId()'>@client.GetFirstName() @client.GetLastName()</a></td>
           <td>@client.GetPhoneNumber()</td>
-          <td><a class='button' href='/stylists/@Model.GetId()/edit'>Edit</a></td>
+          <td><a href='/stylists/@Model.GetId()/clients/@client.GetId()/edit'>Edit</a></td>
+          <td><a href='/stylists/@Model.GetId()/clients/@client.GetId()/delete'>Delete</a></td>
         </tr>
       }
  </table>
@@ -34,6 +35,5 @@
 }
 <nav class="bottom">
   <a href='/stylists/@Model.GetId()/clients/new'>Add new client</a>
-  <a href='/stylists/@Model.GetId()/edit'>Edit</a>
   <a href='/stylists/@Model.GetId()/delete'>Delete Stylist</a>
 </nav>

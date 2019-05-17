@@ -55,10 +55,18 @@ nav a:hover, .button:hover {
   text-decoration: none;
 }
  
-nav a.active, .button:active {
+nav a:active, .button:active {
   background-color: #fff;
   color: #444;
   cursor: default;
+}
+
+a {
+  color: peachpuff;
+}
+a:hover {
+  background-color: white;
+  color: rgb(83, 47, 2);
 }
 .button, button {
   background-color: #ddd;
