@@ -5,18 +5,26 @@
   
 @foreach (Stylist stylist in Stylist.GetAll())
 {
-  <p>@stylist.GetFirstName() @stylist.GetLastName():</p>
+  <p><a href='/stylists/@stylist.GetId()'>@stylist.GetFirstName() @stylist.GetLastName()</a></p>
   <ul>
-    @foreach (Client client in @stylist.GetClients())
+    @if (@stylist.GetClients().Count == 0)
     {
-      <li><a href='/stylists/@stylist.GetId()/clients/@client.GetId()'>@client.GetFirstName() @client.GetLastName()</a></li>
+      <li>0 clients</li>
+    }
+
+    @if (@stylist.GetClients().Count > 0)
+    {
+      @foreach (Client client in @stylist.GetClients())
+      {
+        <li><a href='/stylists/@stylist.GetId()/clients/@client.GetId()'>@client.GetFirstName() @client.GetLastName()</a></li>
+      }
     }
   </ul>
 }
    
 
 
-<form action='/stylists/deleteAll' method='post'>
+<form action='/stylists/delete' method='post'>
   <button type='submit'>Delete</button>
   <a href='/stylists' class="button">Cancel</a>
 </form>

@@ -4,11 +4,11 @@
 @using HairSalon.Models;
 <table>
   <tr>
-    <td><strong>Specialty @Model["specialty"].GetSpecialty()</strong></td>
+    <td><strong>@Model["specialty"].GetSpecialty()</strong></td>
     <td><a href='/specialties/@Model["specialty"].GetId()/edit'>Edit</a></td>
     <td><a href='/specialties/@Model["specialty"].GetId()/delete'>Delete</a></td>
   </tr>
-</table>
+
 
 
 @if (@Model["specialty"].GetStylists().Count == 0)
@@ -18,13 +18,16 @@
 
 @if (@Model["specialty"].GetStylists().Count != 0)
 {
-  <ul>
     @foreach (Stylist stylist in @Model["specialty"].GetStylists())
     {
-      <li><a href='/stylists/@stylist.GetId()'>@stylist.GetFirstName() @stylist.GetLastName()</a></li>
+      <tr>
+        <td><a href='/stylists/@stylist.GetId()'>@stylist.GetFirstName() @stylist.GetLastName()</a></td>
+        <td><a href='/specialties/@Model["specialty"].GetId()/stylists/remove/@stylist.GetId()'>Remove Stylist</a></td>
+       </tr>
     }
-  </ul>
 }
+</table>
+
 <strong>Add a stylist to this specialty</strong>
 <form action='/specialties/@Model["specialty"].GetId()/stylists/new' method='post'>
   <select id='stylistId' name='stylistId' type='text'>

@@ -1,0 +1,18 @@
+@{Layout = "_Layout";}
+@using HairSalon.Models;
+<h2>Delete Specialties</h2>
+<p> Are you sure you want to delete all of these specialties?</p>
+
+<ul>
+  @foreach(Specialty specialty in @Model)
+  {
+    <li><a href='/specialties/@specialty.GetId()'>@specialty.GetSpecialty()</a></li>
+  }
+</ul>
+   
+
+
+<form action='/specialties/delete' method='post'>
+  <button type='submit'>Delete All</button>
+  <a href='/specialties' class="button">Cancel</a>
+</form>

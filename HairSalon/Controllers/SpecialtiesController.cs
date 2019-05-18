@@ -37,19 +37,7 @@ namespace HairSalon.Controllers
       model.Add("stylists", allStylists);
       return View(model);
     }
-    // Adds stylist to specialty
-    [HttpPost("/specialties/{id}/stylists/new")]
-    public ActionResult AddStylist(int id, int stylistId)
-    {
-      Dictionary<string, object> model = new Dictionary<string, object>();
-      Specialty specialty = Specialty.Find(id);
-      Stylist stylist = Stylist.Find(stylistId);
-      specialty.AddStylist(stylist);
-      List<Stylist> allStylists = Stylist.GetAll();
-      model.Add("specialty", specialty);
-      model.Add("stylists", allStylists);
-      return RedirectToAction("Show", model);
-    }
+
     // Display edit form
     [HttpGet("/specialties/{id}/edit")]
     public ActionResult Edit(int id)
@@ -87,6 +75,64 @@ namespace HairSalon.Controllers
       specialty.Delete();
       List<Specialty> allSpecialties = Specialty.GetAll();
       return View("Index", allSpecialties);    
+    }
+
+    // Ask for confirmation to delete all specialties
+    [HttpGet("/specialties/delete")]
+    public ActionResult DeleteAll()
+    {
+      List<Specialty> allSpecialties = Specialty.GetAll();
+      return View(allSpecialties);
+    }
+
+    // Delete all specialties
+    [HttpPost("/specialties/delete")]
+    public ActionResult DeleteAllSpecialties()
+    {
+      Specialty.DeleteAll();
+      List<Specialty> allSpecialties = Specialty.GetAll();
+      return View("Index", allSpecialties);
+    }
+
+    // Adds stylist to specialty
+    [HttpPost("/specialties/{id}/stylists/new")]
+    public ActionResult AddStylist(int id, int stylistId)
+    {
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      Specialty specialty = Specialty.Find(id);
+      Stylist stylist = Stylist.Find(stylistId);
+      specialty.AddStylist(stylist);
+      List<Stylist> allStylists = Stylist.GetAll();
+      model.Add("specialty", specialty);
+      model.Add("stylists", allStylists);
+      return RedirectToAction("Show", model);
+    }
+
+    // Ask user if they really want to remove a stylist from a specialty
+    [HttpGet("/specialties/{id}/stylists/remove/{stylistid}")]
+    public ActionResult RemoveStylist(int id, int stylistId)
+    {
+      Specialty specialty = Specialty.Find(id);
+      Stylist stylist = Stylist.Find(stylistId);
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      model.Add("specialty", specialty);
+      model.Add("stylist", stylist);      
+      return View(model);
+    }
+
+    // Remove stylist from specialty
+    [HttpPost("/specialties/{id}/stylists/remove/{stylistId}")]
+    public ActionResult RemovesStylist(int id, int stylistId)
+    {
+      Specialty specialty = Specialty.Find(id);
+      Stylist stylist = Stylist.Find(stylistId);
+      specialty.RemoveStylist(stylist);
+
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      List<Stylist> allStylists = Stylist.GetAll();
+      model.Add("specialty", specialty);
+      model.Add("stylists", allStylists);       
+      return View("Show", model);
     }
   }
 }

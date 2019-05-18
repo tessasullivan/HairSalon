@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: May 17, 2019 at 10:48 PM
+-- Generation Time: May 18, 2019 at 05:59 PM
 -- Server version: 5.7.25
 -- PHP Version: 7.3.1
 
@@ -19,6 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `tessa_sullivan`
 --
+DROP DATABASE IF EXISTS tessa_sullivan;
 CREATE DATABASE IF NOT EXISTS `tessa_sullivan` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `tessa_sullivan`;
 
@@ -68,6 +69,16 @@ CREATE TABLE `specialties` (
   `specialty` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `specialties`
+--
+
+INSERT INTO `specialties` (`id`, `specialty`) VALUES
+(1, 'Highlights / Lowlights'),
+(2, 'Hair cuts'),
+(3, 'Straightening'),
+(4, 'Corrective Color');
+
 -- --------------------------------------------------------
 
 --
@@ -79,6 +90,18 @@ CREATE TABLE `specialties_stylists` (
   `specialty_id` int(11) NOT NULL,
   `stylist_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `specialties_stylists`
+--
+
+INSERT INTO `specialties_stylists` (`id`, `specialty_id`, `stylist_id`) VALUES
+(1, 1, 5),
+(2, 1, 10),
+(3, 3, 11),
+(4, 3, 12),
+(5, 4, 11),
+(6, 4, 12);
 
 -- --------------------------------------------------------
 
@@ -145,13 +168,13 @@ ALTER TABLE `clients`
 -- AUTO_INCREMENT for table `specialties`
 --
 ALTER TABLE `specialties`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `specialties_stylists`
 --
 ALTER TABLE `specialties_stylists`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `stylists`

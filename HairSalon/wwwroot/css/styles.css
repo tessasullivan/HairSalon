@@ -39,8 +39,8 @@ nav a{
   margin: 0;
   /* font-family: 'Oswald', sans-serif; */
   font-size: 1.2em;
-  line-height: 30px;
-  height: 30px;
+  line-height: 15px;
+  height: 15px;
   border-bottom: 1px solid #888;
   border-right: 1px solid #000099;
   text-decoration: none;
@@ -73,10 +73,10 @@ a:hover {
   text-align: center;
   padding: 0;
   margin: 0;
-  width: 65px;
-  height: 30px;
-  border-bottom: 1px solid #888;
-  border-right: 1px solid #000099;
+  width: 75px;
+  height: 25px;
+  /* border-bottom: 1px solid #888; */
+  border-left: 1px solid #000099;
   text-decoration: none;
   color: #000099;
   display: block;
@@ -87,8 +87,8 @@ a:hover {
   nav a {
     width: 120px;
     border-bottom: none;
-    height: 50px;
-    line-height: 50px;
+    height: 40px;
+    line-height: 40px;
     font-size: 1em;
   }
    nav a {

@@ -90,12 +90,12 @@ namespace HairSalon.Controllers
     }
 
     // Ask for confirmation to delete all stylists and clients
-    [HttpGet("/stylists/deleteall")]
+    [HttpGet("/stylists/delete")]
     public ActionResult DeleteAll()
     {
       return View();
     }
-    [HttpPost("/stylists/deleteAll")]
+    [HttpPost("/stylists/delete")]
     public ActionResult DeleteEveryOne()
     {
       Stylist.DeleteAll();
@@ -103,6 +103,6 @@ namespace HairSalon.Controllers
       List<Stylist> allStylists = Stylist.GetAll();
       return View("Index", allStylists);
     }
-
+    // [HttpGet("")]  
   }
 }

@@ -42,24 +42,7 @@ namespace HairSalon.Tests
       List<Specialty> actual = Specialty.GetAll();
       CollectionAssert.AreEqual(expected, actual);
     }
-    [TestMethod]
-    public void GetStylists_GetsListOfStylists_StylistList()
-    {
-      string name = "Foils";
-      Specialty specialty= new Specialty(name);
-      specialty.Save();
 
-      string firstName = "Sylvia";
-      string lastName = "Green";
-      string phoneNumber = "206-555-6789";
-      Stylist stylist = new Stylist(firstName, lastName, phoneNumber);
-      stylist.Save();
-      specialty.AddStylist(stylist);
-
-      List<Stylist> expected = new List<Stylist>{stylist};
-      List<Stylist> actual = specialty.GetStylists();
-      CollectionAssert.AreEqual(expected, actual);
-    }
     [TestMethod]
     public void Edit_EditsSpecialtyName_Specialty()
     {
@@ -83,6 +66,59 @@ namespace HairSalon.Tests
 
       List<Specialty> expected = new List<Specialty> {};
       List<Specialty> actual = Specialty.GetAll();
+      CollectionAssert.AreEqual(expected, actual);
+    }
+    [TestMethod]
+    public void AddStylist_AddsStylistToSpecialty_StylistList()
+    {
+      string name = "Foils";
+      Specialty specialty= new Specialty(name);
+      specialty.Save();
+
+      string firstName = "Sylvia";
+      string lastName = "Green";
+      string phoneNumber = "206-555-6789";
+      Stylist stylist = new Stylist(firstName, lastName, phoneNumber);
+      stylist.Save();
+      specialty.AddStylist(stylist);
+      List<Stylist> expected = new List<Stylist>{stylist};
+      List<Stylist> actual = specialty.GetStylists();
+      CollectionAssert.AreEqual(expected, actual);
+    }
+    [TestMethod]
+    public void GetStylists_GetsListOfStylists_StylistList()
+    {
+      string name = "Foils";
+      Specialty specialty= new Specialty(name);
+      specialty.Save();
+
+      string firstName = "Sylvia";
+      string lastName = "Green";
+      string phoneNumber = "206-555-6789";
+      Stylist stylist = new Stylist(firstName, lastName, phoneNumber);
+      stylist.Save();
+      specialty.AddStylist(stylist);
+
+      List<Stylist> expected = new List<Stylist>{stylist};
+      List<Stylist> actual = specialty.GetStylists();
+      CollectionAssert.AreEqual(expected, actual);
+    }
+    [TestMethod]
+    public void RemoveStylist_RemovesStylistFromSpecialty_EmptyStylistList()
+    {
+      string name = "Foils";
+      Specialty specialty= new Specialty(name);
+      specialty.Save();
+
+      string firstName = "Sylvia";
+      string lastName = "Green";
+      string phoneNumber = "206-555-6789";
+      Stylist stylist = new Stylist(firstName, lastName, phoneNumber);
+      stylist.Save();
+      specialty.AddStylist(stylist);
+      specialty.RemoveStylist(stylist);
+      List<Stylist> expected = new List<Stylist>{};
+      List<Stylist> actual = specialty.GetStylists();
       CollectionAssert.AreEqual(expected, actual);
     }
   }

@@ -19,6 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `tessa_sullivan_test`
 --
+DROP DATABASE IF EXISTS tessa_sullivan_test;
 CREATE DATABASE IF NOT EXISTS `tessa_sullivan_test` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `tessa_sullivan_test`;
 
