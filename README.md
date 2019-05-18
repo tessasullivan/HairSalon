@@ -40,10 +40,14 @@ This application will allow salon employees to manage the salon's stylists and c
 4. cd to HairSalon.Tests and run dotnet restore (optional).
 5. Install and configure MySQL - MAMP is recommended.
 6. Run MySQL in the terminal with user root.  If no special password has been added to root, the command is 'mysql -uroot -proot'
-7. Create the database and their tables.  You can either 
+7. Create the database and their tables.  You can either  
+
   a. Import the tessa_sullilvan.sql and tessa_sullivan_test.sql files located in the repository's main directory by running 'source <file>' (this method includes sample data) or importing the file through phpMyAdmin.
+   
   or 
+  
   b. Run the following commands:
+  
     ```CREATE DATABASE IF NOT EXISTS `tessa_sullivan`;  
     USE `tessa_sullivan`;   
     CREATE TABLE `clients` (  
