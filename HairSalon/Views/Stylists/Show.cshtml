@@ -6,6 +6,8 @@
   <tr>
     <td><strong><a href='/stylists/@Model.GetId()/edit'>@Model.GetFirstName() @Model.GetLastName() </a></strong></td>
     <td>@Model.GetPhoneNumber()</td>
+    <td><a href='/stylists/@Model.GetId()/edit'>Edit</a></td>
+    <td><a href='/stylists/@Model.GetId()/delete'>Delete</a></td>
   </tr>
 </table>
 
@@ -35,5 +37,4 @@
 }
 <nav class="bottom">
   <a href='/stylists/@Model.GetId()/clients/new'>Add new client</a>
-  <a href='/stylists/@Model.GetId()/delete'>Delete Stylist</a>
 </nav>

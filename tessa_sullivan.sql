@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: May 17, 2019 at 06:15 PM
+-- Generation Time: May 17, 2019 at 10:48 PM
 -- Server version: 5.7.25
 -- PHP Version: 7.3.1
 
@@ -42,7 +42,7 @@ CREATE TABLE `clients` (
 --
 
 INSERT INTO `clients` (`id`, `first_name`, `last_name`, `phone_number`, `notes`, `stylist_id`) VALUES
-(9, 'Judith', 'Monroe', '206=867-5309', 'Double-process, use brand X for color, mix 75% Sapphire and 25% Amethyst', 5),
+(9, 'Judith', 'Monroe', '206-867-5309', 'Double-process, use brand X for color, mix 75% Sapphire and 25% Amethyst', 5),
 (10, 'Hannah', 'Chance', '206-555-4930', '', 5),
 (11, 'Fiona', 'Hardingham', '425-355-9009', 'Notes', 5),
 (12, 'Katherine', 'Kellgren', '832-899-3421', 'Notes', 5),
@@ -56,6 +56,29 @@ INSERT INTO `clients` (`id`, `first_name`, `last_name`, `phone_number`, `notes`,
 (21, 'Verity', 'Kindle', '832-395-3940', '', 12),
 (22, 'Sandra', 'Foster', '919-619-9391', '', 12),
 (23, 'Bennett', 'O\'Reilly', '206-786-4429', '', 12);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `specialties`
+--
+
+CREATE TABLE `specialties` (
+  `id` int(11) NOT NULL,
+  `specialty` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `specialties_stylists`
+--
+
+CREATE TABLE `specialties_stylists` (
+  `id` int(11) NOT NULL,
+  `specialty_id` int(11) NOT NULL,
+  `stylist_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -75,7 +98,7 @@ CREATE TABLE `stylists` (
 --
 
 INSERT INTO `stylists` (`id`, `first_name`, `last_name`, `phone_number`) VALUES
-(5, 'Greg', 'Johnson', '206-867-5309'),
+(5, 'Gregory', 'Johnston', '206-867-5310'),
 (10, 'Katie', 'Dior', '832-455-9803'),
 (11, 'Lucy', 'Diamond', '206-242-3356'),
 (12, 'Connie', 'Willis', '206-544-3042');
@@ -88,6 +111,18 @@ INSERT INTO `stylists` (`id`, `first_name`, `last_name`, `phone_number`) VALUES
 -- Indexes for table `clients`
 --
 ALTER TABLE `clients`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `specialties`
+--
+ALTER TABLE `specialties`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `specialties_stylists`
+--
+ALTER TABLE `specialties_stylists`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -104,7 +139,19 @@ ALTER TABLE `stylists`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT for table `specialties`
+--
+ALTER TABLE `specialties`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `specialties_stylists`
+--
+ALTER TABLE `specialties_stylists`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `stylists`
