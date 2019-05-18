@@ -44,9 +44,9 @@ This application will allow salon employees to manage the salon's stylists and c
   a. Import the tessa_sullilvan.sql and tessa_sullivan_test.sql files located in the repository's main directory by running 'source <file>' (this method includes sample data) or importing the file through phpMyAdmin.
   or 
   b. Run the following commands:
-    ```CREATE DATABASE IF NOT EXISTS `tessa_sullivan`;
-    USE `tessa_sullivan`;
-    CREATE TABLE `clients` (
+    ```CREATE DATABASE IF NOT EXISTS `tessa_sullivan`;  
+    USE `tessa_sullivan`;   
+    CREATE TABLE `clients` (  
       `id` int(11) NOT NULL AUTO_INCREMENT,
       `first_name` varchar(255) NOT NULL,
       `last_name` varchar(255) NOT NULL,
