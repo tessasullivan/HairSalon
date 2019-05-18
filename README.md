@@ -48,7 +48,7 @@ This application will allow salon employees to manage the salon's stylists and c
   
   b. Run the following commands:
   
-    ```CREATE DATABASE IF NOT EXISTS `tessa_sullivan`;  
+    CREATE DATABASE IF NOT EXISTS `tessa_sullivan`;  
     USE `tessa_sullivan`;   
     CREATE TABLE `clients` (  
       `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -75,9 +75,9 @@ This application will allow salon employees to manage the salon's stylists and c
       `last_name` varchar(255) NOT NULL,
       `phone_number` varchar(255) NOT NULL, 
       PRIMARY KEY (id))
-      ENGINE=InnoDB DEFAULT CHARSET=utf8;```
+      ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-    ```CREATE DATABASE IF NOT EXISTS `tessa_sullivan_test`;
+    CREATE DATABASE IF NOT EXISTS `tessa_sullivan_test`;
     USE `tessa_sullivan_test`;
     CREATE TABLE `clients` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -105,7 +105,7 @@ This application will allow salon employees to manage the salon's stylists and c
       `last_name` varchar(255) NOT NULL,
       `phone_number` varchar(255) NOT NULL, 
       PRIMARY KEY (id))
-      ENGINE=InnoDB DEFAULT CHARSET=utf8;```
+      ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 8. In the terminal,run: dotnet run --project HairSalon.
 9. Load localhost:5000 in your web browser.
