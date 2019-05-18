@@ -129,5 +129,34 @@ namespace HairSalon.Controllers
       model.Add("specialties", allSpecialities);
       return View("Show", model);      
     }
+    // [HttpGet("/stylists/{id}/specialties/remove/{specialtyId}")]
+    // public ActionResult ConfirmRemoveSpecialty(int id, int specialtyId)
+    // {
+    //   Stylist stylist = Stylist.Find(id);
+    //   Specialty specialty = Specialty.Find(specialtyId);
+
+    //   System.Console.WriteLine("specialtyId " + specialtyId);
+    //   System.Console.WriteLine("stylistId " + id);
+
+    //   Dictionary<string, object> model = new Dictionary<string, object>();
+    //   List<Specialty> allSpecialities = Specialty.GetAll();
+    //   model.Add("stylist", stylist);
+    //   model.Add("specialties", allSpecialities);
+    //   return View(model);      
+    // }
+    // Removes specialty from stylist and returns to stylist page
+    [HttpPost("/stylists/{id}/specialties/remove/{specialtyId}")]
+    public ActionResult RemoveSpecialty(int id, int specialtyId)
+    {
+      Stylist stylist = Stylist.Find(id);
+      Specialty specialty = Specialty.Find(specialtyId);
+      stylist.RemoveSpecialty(specialty);
+
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      List<Specialty> allSpecialities = Specialty.GetAll();
+      model.Add("stylist", stylist);
+      model.Add("specialties", allSpecialities);
+      return View("Show", model);      
+    }
   }
 }

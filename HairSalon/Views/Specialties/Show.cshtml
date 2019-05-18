@@ -22,7 +22,11 @@
     {
       <tr>
         <td><a href='/stylists/@stylist.GetId()'>@stylist.GetFirstName() @stylist.GetLastName()</a></td>
-        <td><a href='/specialties/@Model["specialty"].GetId()/stylists/remove/@stylist.GetId()'>Remove Stylist</a></td>
+        <td>
+          <form action='/specialties/@Model["specialty"].GetId()/stylists/remove/@stylist.GetId()' method='post'>
+              <button class="fake-link" type='submit'>Remove Stylist</button>
+          </form>
+        </td>
        </tr>
     }
 }

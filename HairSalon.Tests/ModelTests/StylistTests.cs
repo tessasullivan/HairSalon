@@ -243,7 +243,7 @@ namespace HairSalon.Tests
     //   specialty1.Save();
 
     //   stylist.AddSpecialty(specialty1);
-    //   stylist.RemoveSpeciality(specialty1);
+    //   stylist.RemoveSpecialty(specialty1);
     //   List<Specialty> expected = new List<Specialty> {};
     //   System.Console.WriteLine("number in expected "+ expected.Count);
     //   List<Specialty> actual = stylist.GetSpecialties();

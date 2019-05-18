@@ -19,13 +19,21 @@
 
 @if (@Model["stylist"].GetSpecialties().Count > 0)
 {
-  <ul>
-    
-      @foreach (Specialty specialty in @Model["stylist"].GetSpecialties())
-      {
-          <li><a href='/specialties/@specialty.GetId()'>@specialty.GetSpecialty()</a></li>
-      }
-  </ul>
+  <table>
+    <ul>
+        @foreach (Specialty specialty in @Model["stylist"].GetSpecialties())
+        {
+            <tr>
+              <td><li><a href='/specialties/@specialty.GetId()'>@specialty.GetSpecialty()</a></li></td>
+              <td>
+                <form action='/stylists/@Model["stylist"].GetId()/specialties/remove/@specialty.GetId()' method="post">
+                  <button class="fake-link" type='submit'>Remove Specialty</button>
+                </form>
+              </td>
+            </tr>
+        }
+    </ul>
+  </table>
 }
 <form action='/stylists/@Model["stylist"].GetId()/specialties/new' method='post'>
   <label>Add specialty to this stylist</label><br>

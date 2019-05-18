@@ -21,7 +21,7 @@ body {
   color: white;
 }
 th, td {
-  padding-right: 15px;
+  padding-right: 30px;
 }
 table {
   margin-top: 15px;
@@ -61,10 +61,10 @@ nav a:active, .button:active {
   cursor: default;
 }
 
-a {
+a, .fake-link{
   color: peachpuff;
 }
-a:hover {
+a:hover, .fake-link:hover {
   background-color: white;
   color: rgb(83, 47, 2);
 }
@@ -82,6 +82,8 @@ a:hover {
   display: block;
   transition: .3s background-color;
   margin-top: 5px;
+  font-family: inherit;
+  font-size: 100%;
 }
 @media screen and (min-width: 600px) {
   nav a {
@@ -110,4 +112,7 @@ strong {
 }
 .clientList > table {
   margin-top: 0px;
+}
+.fake-link {
+  display: contents;
 }

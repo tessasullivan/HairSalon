@@ -1,8 +1,0 @@
-@{Layout = "_Layout";}
-@using HairSalon.Models;
-<h2>Remove Stylist from @Model["specialty"].GetSpecialty()</h2>
-<p> Are you sure you want to remove @Model["stylist"].GetFirstName() @Model["stylist"].GetLastName()?</p>
-
-<form action='/specialties/@Model["specialty"].GetId()/stylists/remove/@Model["stylist"].GetId()' method='post'>
-  <button type='submit'>Remove</button>
-</form>

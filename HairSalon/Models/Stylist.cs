@@ -264,7 +264,7 @@ namespace HairSalon.Models
         conn.Dispose();
       }        
     }
-    public void RemoveSpeciality(Specialty specialty)
+    public void RemoveSpecialty(Specialty specialty)
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
