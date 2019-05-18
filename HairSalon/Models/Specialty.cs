@@ -49,7 +49,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM specialties;";
+      cmd.CommandText = @"DELETE FROM specialties;DELETE FROM specialties_stylists;";
       cmd.ExecuteNonQuery();
       conn.Close();
       if (conn != null)

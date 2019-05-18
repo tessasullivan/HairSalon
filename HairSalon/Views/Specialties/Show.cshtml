@@ -2,31 +2,32 @@
   Layout = "_Layout";
 }
 @using HairSalon.Models;
-<h3>Specialty @Model.GetSpecialty()</h3>
+<h3>Specialty @Model["specialty"].GetSpecialty()</h3>
 
-@if (@Model.GetStylists().Count == 0)
+@if (@Model["specialty"].GetStylists().Count == 0)
 {
   <p>Currently, this specialty does not have any stylists.</p>
 }
 
-@if (@Model.GetStylists().Count != 0)
+@if (@Model["specialty"].GetStylists().Count != 0)
 {
   <ul>
-    @foreach (Stylist stylist in @Model.GetStylists())
+    @foreach (Stylist stylist in @Model["specialty"].GetStylists())
     {
       <li><a href='/stylists/@stylist.GetId()'>@stylist.GetFirstName() @stylist.GetLastName()</a></li>
     }
   </ul>
 }
 <h4>Add a stylist to this specialty</h4>
-<form action='/specialties/@Model.GetId()' method='post'>
+<form action='/specialties/@Model["specialty"].GetId()/stylists/new' method='post'>
   <select id='stylistId' name='stylistId' type='text'>
-    
-    @foreach (Stylist stylist in @Model.GetStylists())
+
+    @foreach (Stylist stylist in @Model["stylists"])
     {
         <option value='@stylist.GetId()'>@stylist.GetFirstName() @stylist.GetLastName()</option>
     }
   </select>
+  <button type='submit'>Add</button>
 </form>
 
 <nav class="bottom">
