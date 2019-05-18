@@ -111,6 +111,8 @@ This application will allow salon employees to manage the salon's stylists and c
 
 ## Known Issues
 * A stylist can be added multiple times to a specialty.
+* A specialty can be added multiple times to a stylist.
+* Currently, there is no way to switch a client to another stylist.
 
 ## Technologies Used
 

@@ -76,6 +76,7 @@ a:hover, .fake-link:hover {
   width: 75px;
   height: 25px;
   /* border-bottom: 1px solid #888; */
+  border: 0px;
   border-left: 1px solid #000099;
   text-decoration: none;
   color: #000099;
@@ -115,4 +116,7 @@ strong {
 }
 .fake-link {
   display: contents;
+}
+hr {
+  margin:25px;
 }

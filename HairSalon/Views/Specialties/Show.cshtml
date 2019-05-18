@@ -2,6 +2,7 @@
   Layout = "_Layout";
 }
 @using HairSalon.Models;
+
 <table>
   <tr>
     <td><strong>@Model["specialty"].GetSpecialty()</strong></td>
@@ -9,7 +10,7 @@
     <td><a href='/specialties/@Model["specialty"].GetId()/delete'>Delete</a></td>
   </tr>
 
-
+<hr>
 
 @if (@Model["specialty"].GetStylists().Count == 0)
 {
@@ -24,14 +25,14 @@
         <td><a href='/stylists/@stylist.GetId()'>@stylist.GetFirstName() @stylist.GetLastName()</a></td>
         <td>
           <form action='/specialties/@Model["specialty"].GetId()/stylists/remove/@stylist.GetId()' method='post'>
-              <button class="fake-link" type='submit'>Remove Stylist</button>
+              <button class="fake-link" type='submit'>Remove</button>
           </form>
         </td>
        </tr>
     }
 }
 </table>
-
+<hr>
 <strong>Add a stylist to this specialty</strong>
 <form action='/specialties/@Model["specialty"].GetId()/stylists/new' method='post'>
   <select id='stylistId' name='stylistId' type='text'>
