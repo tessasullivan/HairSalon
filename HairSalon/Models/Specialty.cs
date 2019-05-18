@@ -57,6 +57,21 @@ namespace HairSalon.Models
         conn.Dispose();
       }      
     }
+    public void Delete()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM specialties WHERE id = (@thisId);DELETE FROM specialties_stylists WHERE specialty_id = (@thisId);";
+      MySqlParameter thisId = new MySqlParameter("@thisId", _id);
+      cmd.Parameters.Add(thisId);
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }      
+    }
     public void Save()
     {
       MySqlConnection conn = DB.Connection();
@@ -98,6 +113,24 @@ namespace HairSalon.Models
         conn.Dispose();
       }
       return foundSpeciality;
+    }
+    public void Edit(string specialty)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"UPDATE specialties SET specialty = (@specialty) WHERE id = @thisId;";
+      MySqlParameter specialtyParameter = new MySqlParameter("@specialty", specialty);
+      MySqlParameter thisId = new MySqlParameter("@thisId", _id);
+      cmd.Parameters.Add(specialtyParameter);
+      cmd.Parameters.Add(thisId);
+      cmd.ExecuteNonQuery();
+      _specialty = specialty;
+      conn.Close();     
+      if (conn != null)
+      {
+        conn.Dispose();
+      } 
     }
     public static List<Specialty> GetAll()
     {

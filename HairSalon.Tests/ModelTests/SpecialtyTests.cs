@@ -58,14 +58,31 @@ namespace HairSalon.Tests
 
       List<Stylist> expected = new List<Stylist>{stylist};
       List<Stylist> actual = specialty.GetStylists();
-      foreach (Stylist newStylist in expected)
-      {
-        System.Console.WriteLine("expected" + newStylist.GetFirstName());
-      }      
-      foreach (Stylist newStylist in actual)
-      {
-        System.Console.WriteLine("actual" + newStylist.GetFirstName());
-      }
+      CollectionAssert.AreEqual(expected, actual);
+    }
+    [TestMethod]
+    public void Edit_EditsSpecialtyName_Specialty()
+    {
+      string name = "Foils";
+      Specialty specialty= new Specialty(name);
+      specialty.Save();
+      int specialtyId = specialty.GetId();
+      string newName = "Highlights";
+      specialty.Edit(newName);
+
+      Specialty actual = Specialty.Find(specialtyId);
+      Assert.AreEqual(actual, specialty);     
+    }
+    [TestMethod]
+    public void Delete_DeletesSpecialty_EmptySpecialtyList()
+    {
+      string name = "Foils";
+      Specialty specialty= new Specialty(name);
+      specialty.Save();
+      specialty.Delete();
+
+      List<Specialty> expected = new List<Specialty> {};
+      List<Specialty> actual = Specialty.GetAll();
       CollectionAssert.AreEqual(expected, actual);
     }
   }

@@ -1,0 +1,10 @@
+@{
+  Layout = "_Layout";
+}
+@using HairSalon.Models;
+<h3>Edit Specialty @Model.GetSpecialty()</h3>
+
+<form action="/specialties/@Model.GetId()" method='post'>
+  <input id='newSpecialty' name='newSpecialty' type='text' value="@Model.GetSpecialty()" required>
+  <button type="submit">Update</button>
+</form>

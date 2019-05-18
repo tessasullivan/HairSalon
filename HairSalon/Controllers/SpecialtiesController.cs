@@ -50,5 +50,43 @@ namespace HairSalon.Controllers
       model.Add("stylists", allStylists);
       return RedirectToAction("Show", model);
     }
+    // Display edit form
+    [HttpGet("/specialties/{id}/edit")]
+    public ActionResult Edit(int id)
+    {
+      Specialty specialty = Specialty.Find(id);
+      return View(specialty);
+    }
+    // Edit the specialty and return to specialty page
+    [HttpPost("/specialties/{id}")]
+    public ActionResult Update(int id, string newSpecialty)
+    {
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      Specialty specialty = Specialty.Find(id);
+      specialty.Edit(newSpecialty);
+
+      List<Stylist> allStylists = Stylist.GetAll();
+      model.Add("specialty", specialty);
+      model.Add("stylists", allStylists);
+      return View("Show", model);
+    }
+
+    // Ask to confirm deleting specialty
+    [HttpGet("/specialties/{id}/delete")]
+    public ActionResult Delete(int id)
+    {
+      Specialty specialty = Specialty.Find(id);
+      return View(specialty);
+    }
+
+    // Delete specialty
+    [HttpPost("/specialties/{id}/delete")]
+    public ActionResult DeleteSpecialty(int id)
+    {
+      Specialty specialty = Specialty.Find(id);
+      specialty.Delete();
+      List<Specialty> allSpecialties = Specialty.GetAll();
+      return View("Index", allSpecialties);    
+    }
   }
 }

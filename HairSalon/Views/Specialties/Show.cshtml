@@ -2,7 +2,14 @@
   Layout = "_Layout";
 }
 @using HairSalon.Models;
-<h3>Specialty @Model["specialty"].GetSpecialty()</h3>
+<table>
+  <tr>
+    <td><strong>Specialty @Model["specialty"].GetSpecialty()</strong></td>
+    <td><a href='/specialties/@Model["specialty"].GetId()/edit'>Edit</a></td>
+    <td><a href='/specialties/@Model["specialty"].GetId()/delete'>Delete</a></td>
+  </tr>
+</table>
+
 
 @if (@Model["specialty"].GetStylists().Count == 0)
 {
@@ -18,7 +25,7 @@
     }
   </ul>
 }
-<h4>Add a stylist to this specialty</h4>
+<strong>Add a stylist to this specialty</strong>
 <form action='/specialties/@Model["specialty"].GetId()/stylists/new' method='post'>
   <select id='stylistId' name='stylistId' type='text'>
 
