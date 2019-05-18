@@ -44,8 +44,7 @@ This application will allow salon employees to manage the salon's stylists and c
   a. Import the tessa_sullilvan.sql and tessa_sullivan_test.sql files located in the repository's main directory by running 'source <file>' (this method includes sample data) or importing the file through phpMyAdmin.
   or 
   b. Run the following commands:
-    DROP DATABASE IF EXISTS tessa_sullivan;
-    CREATE DATABASE IF NOT EXISTS `tessa_sullivan`;
+    ```CREATE DATABASE IF NOT EXISTS `tessa_sullivan`;
     USE `tessa_sullivan`;
     CREATE TABLE `clients` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -72,10 +71,9 @@ This application will allow salon employees to manage the salon's stylists and c
       `last_name` varchar(255) NOT NULL,
       `phone_number` varchar(255) NOT NULL, 
       PRIMARY KEY (id))
-      ENGINE=InnoDB DEFAULT CHARSET=utf8;
+      ENGINE=InnoDB DEFAULT CHARSET=utf8;```
 
-    DROP DATABASE IF EXISTS tessa_sullivan_test;
-    CREATE DATABASE IF NOT EXISTS `tessa_sullivan_test`;
+    ```CREATE DATABASE IF NOT EXISTS `tessa_sullivan_test`;
     USE `tessa_sullivan_test`;
     CREATE TABLE `clients` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -103,7 +101,7 @@ This application will allow salon employees to manage the salon's stylists and c
       `last_name` varchar(255) NOT NULL,
       `phone_number` varchar(255) NOT NULL, 
       PRIMARY KEY (id))
-      ENGINE=InnoDB DEFAULT CHARSET=utf8;
+      ENGINE=InnoDB DEFAULT CHARSET=utf8;```
 
 8. In the terminal,run: dotnet run --project HairSalon.
 9. Load localhost:5000 in your web browser.
