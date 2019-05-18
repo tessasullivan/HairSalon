@@ -4,37 +4,67 @@
 
 <table>
   <tr>
-    <td><strong><a href='/stylists/@Model.GetId()/edit'>@Model.GetFirstName() @Model.GetLastName() </a></strong></td>
-    <td>@Model.GetPhoneNumber()</td>
-    <td><a href='/stylists/@Model.GetId()/edit'>Edit</a></td>
-    <td><a href='/stylists/@Model.GetId()/delete'>Delete</a></td>
+    <td><strong><a href='/stylists/@Model["stylist"].GetId()/edit'>@Model["stylist"].GetFirstName() @Model["stylist"].GetLastName() </a></strong></td>
+    <td>@Model["stylist"].GetPhoneNumber()</td>
+    <td><a href='/stylists/@Model["stylist"].GetId()/edit'>Edit</a></td>
+    <td><a href='/stylists/@Model["stylist"].GetId()/delete'>Delete</a></td>
   </tr>
 </table>
+<hr>
+<p><strong>Specialties</strong></p>
+@if (@Model["stylist"].GetSpecialties().Count == 0)
+{
+  <p>No specialties indicated.</p>
+}
 
-@if (@Model.GetClients().Count == 0)
+@if (@Model["stylist"].GetSpecialties().Count > 0)
+{
+  <ul>
+    
+      @foreach (Specialty specialty in @Model["stylist"].GetSpecialties())
+      {
+          <li><a href='/specialties/@specialty.GetId()'>@specialty.GetSpecialty()</a></li>
+      }
+  </ul>
+}
+<form action='/stylists/@Model["stylist"].GetId()/specialties/new' method='post'>
+  <label>Add specialty to this stylist</label><br>
+  <select id='specialtyId' name='specialtyId' type='text'>
+    @foreach (Specialty specialty in @Model["specialties"])
+    {
+      <option value='@specialty.GetId()'>@specialty.GetSpecialty()</option>
+    }
+  </select>
+  <button type='submit'>Add</button>
+</form>
+<hr>
+
+@if (@Model["stylist"].GetClients().Count == 0)
 {
   <p>Currently, this stylist does not have any clients</p>
 }
-@if (@Model.GetClients().Count != 0)
+@if (@Model["stylist"].GetClients().Count != 0)
 {
-  <table>
-    <tr>
-      <th>Name</th>
-      <th>Phone</th>
-    </tr>
- 
-      @foreach ( Client client in @Model.GetClients())
-      {
-        <tr>
-          <td><a href='/stylists/@Model.GetId()/clients/@client.GetId()'>@client.GetFirstName() @client.GetLastName()</a></td>
-          <td>@client.GetPhoneNumber()</td>
-          <td><a href='/stylists/@Model.GetId()/clients/@client.GetId()/edit'>Edit</a></td>
-          <td><a href='/stylists/@Model.GetId()/clients/@client.GetId()/delete'>Delete</a></td>
-        </tr>
-      }
- </table>
-
+  <div class="clientList">
+    <p><strong>Clients</strong></p>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Phone</th>
+      </tr>
+  
+        @foreach ( Client client in @Model["stylist"].GetClients())
+        {
+          <tr>
+            <td><a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'>@client.GetFirstName() @client.GetLastName()</a></td>
+            <td>@client.GetPhoneNumber()</td>
+            <td><a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()/edit'>Edit</a></td>
+            <td><a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()/delete'>Delete</a></td>
+          </tr>
+        }
+  </table>
+  </div>
 }
 <nav class="bottom">
-  <a href='/stylists/@Model.GetId()/clients/new'>Add new client</a>
+  <a href='/stylists/@Model["stylist"].GetId()/clients/new'>Add new client</a>
 </nav>

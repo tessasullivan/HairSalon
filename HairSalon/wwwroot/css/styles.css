@@ -24,8 +24,8 @@ th, td {
   padding-right: 15px;
 }
 table {
-  margin-top: 25px;
-  margin-bottom: 40px;
+  margin-top: 15px;
+  margin-bottom: 20px;
 }
 nav {
   margin-bottom: 50px;
@@ -100,8 +100,14 @@ a:hover {
   margin-top: 100px;
 }
 .bottom {
-  margin-top: 100px;
+  margin-top: 50px;
 }
 strong {
   font-size: 1.2em;
+}
+.clientList {
+  margin-top: 25px;
+}
+.clientList > table {
+  margin-top: 0px;
 }

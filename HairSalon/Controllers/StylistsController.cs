@@ -17,7 +17,11 @@ namespace HairSalon.Controllers
     public ActionResult Show(int id)
     {
       Stylist stylist = Stylist.Find(id);
-      return View(stylist);
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      List<Specialty> allSpecialities = Specialty.GetAll();
+      model.Add("stylist", stylist);
+      model.Add("specialties", allSpecialities);
+      return View(model);
     }
     //Displays form for adding a stylist
     [HttpGet("/stylists/new")]
@@ -48,7 +52,11 @@ namespace HairSalon.Controllers
       }
       Client client = new Client(firstName, lastName, phoneNumber, stylistId, notes, id);
       client.Save();
-      return View("Show", stylist);      
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      List<Specialty> allSpecialities = Specialty.GetAll();
+      model.Add("stylist", stylist);
+      model.Add("specialties", allSpecialities);
+      return View("Show", model);      
     }
 
     [HttpGet("/stylists/{id}/edit")]
@@ -63,7 +71,11 @@ namespace HairSalon.Controllers
     {
       Stylist stylist = Stylist.Find(id);
       stylist.Edit(first, last, phone);
-      return View("Show", stylist);
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      List<Specialty> allSpecialities = Specialty.GetAll();
+      model.Add("stylist", stylist);
+      model.Add("specialties", allSpecialities);
+      return View("Show", model);
     }
 
     // Ask for confirmation of delete
@@ -103,6 +115,19 @@ namespace HairSalon.Controllers
       List<Stylist> allStylists = Stylist.GetAll();
       return View("Index", allStylists);
     }
-    // [HttpGet("")]  
+    // Add speciality to stylist
+    [HttpPost("/stylists/{id}/specialties/new")]
+    public ActionResult AddSpecialty(int id, int specialtyId)
+    {
+      Stylist stylist = Stylist.Find(id);
+      Specialty specialty = Specialty.Find(specialtyId);
+      stylist.AddSpecialty(specialty);
+
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      List<Specialty> allSpecialities = Specialty.GetAll();
+      model.Add("stylist", stylist);
+      model.Add("specialties", allSpecialities);
+      return View("Show", model);      
+    }
   }
 }

@@ -225,5 +225,29 @@ namespace HairSalon.Tests
 
       CollectionAssert.AreEqual(expected, actual);      
     }
+    // This test is not quite right as it is not directly checking the specialties_stylists table.  
+    // I verified functionality by turning off IDisposable and  manually checking the db:
+    // I ran the test with the RemoveSpeciality commented out, verifying that the table had data and 
+    // running it with it in and verifying that the data in the table had been removed.
+    // [TestMethod]
+    // public void RemoveSpecialty_RemovesSpecialtyFromStylist_EmptySpecialtyList()
+    // {
+    //   string firstName = "Sylvia";
+    //   string lastName = "Green";
+    //   string phoneNumber = "206-555-6789";
+    //   Stylist stylist = new Stylist(firstName, lastName, phoneNumber);
+    //   stylist.Save();
+
+    //   string name1 = "Foils";
+    //   Specialty specialty1 = new Specialty(name1);
+    //   specialty1.Save();
+
+    //   stylist.AddSpecialty(specialty1);
+    //   stylist.RemoveSpeciality(specialty1);
+    //   List<Specialty> expected = new List<Specialty> {};
+    //   System.Console.WriteLine("number in expected "+ expected.Count);
+    //   List<Specialty> actual = stylist.GetSpecialties();
+    //   CollectionAssert.AreEqual(expected, actual);       
+    // }
   }
 }

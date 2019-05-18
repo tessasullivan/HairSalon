@@ -211,7 +211,6 @@ namespace HairSalon.Tests
       Client expected = new Client(firstName2, lastName2, phoneNumber2, stylistId, notes2);
       Client actual = client1;
       Assert.AreEqual(expected, actual);
-
     }
   }
 }
