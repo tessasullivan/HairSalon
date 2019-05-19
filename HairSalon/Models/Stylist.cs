@@ -10,14 +10,12 @@ namespace HairSalon.Models
     private string _firstName;
     private string _lastName;
     private string _phoneNumber;
-    private List<Client> _clients;
     public Stylist(string firstName, string lastName, string phoneNumber, int id = 0)
     {
       _id = id;
       _firstName = firstName;
       _lastName = lastName;
       _phoneNumber = phoneNumber;
-      _clients = new List<Client>{};
     }
     public string GetFirstName()
     {
@@ -46,10 +44,6 @@ namespace HairSalon.Models
     public int GetId()
     {
       return _id;
-    }
-    public void AddClient(Client client)
-    {
-      _clients.Add(client);
     }
     public static void DeleteAll()
     {
@@ -147,7 +141,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM stylists;";
+      cmd.CommandText = @"SELECT * FROM stylists ORDER BY last_name;";
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
       int dbId = 0;
       string firstName = "";
@@ -176,7 +170,7 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM clients where stylist_id = (@stylist_id);";
+      cmd.CommandText = @"SELECT * FROM clients where stylist_id = (@stylist_id) ORDER BY last_name;";
       MySqlParameter stylist_id = new MySqlParameter();
       stylist_id.ParameterName = "@stylist_id";
       stylist_id.Value = _id;
@@ -289,7 +283,7 @@ namespace HairSalon.Models
       cmd.CommandText = @"SELECT specialties.* FROM stylists
         JOIN specialties_stylists ON (stylists.id = specialties_stylists.stylist_id)
         JOIN specialties ON (specialties.id = specialties_stylists.specialty_id)
-        WHERE stylists.id = @thisId;";
+        WHERE stylists.id = @thisId ORDER BY specialty;";
       MySqlParameter thisId = new MySqlParameter("@thisId", _id);
       cmd.Parameters.Add(thisId);
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
